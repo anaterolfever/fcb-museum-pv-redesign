@@ -4,164 +4,470 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Barça Museum — FC Barcelona Immersive Tour</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      /* Fever ticket selector (reference UI) */
-      --selector-blue: #0077c8;
-      --selector-blue-hover: #006aad;
-      --selector-blue-soft: #e6f4fc;
-      --fev-blue: #3257ff;
-      --fev-blue-hover: #2547e6;
-      --bg: #ffffff;
-      --bg-muted: #f4f4f5;
-      --border: #e4e4e7;
-      --text: #18181b;
-      --text-muted: #71717a;
+      /* Aligned with pruebaemi / Fever plan tokens */
+      --font: "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif;
+      --color-primary: #0079ca;
+      --color-primary-hover: #0068b0;
+      --color-primary-weak: #e6f4ff;
+      --color-text: #031419;
+      --color-text-subtle: #536b75;
+      --color-text-disable: #a7b2ba;
+      --color-border: #ccd2d8;
+      --color-bg: #ffffff;
+      --color-bg-neutral: #f2f3f3;
+      --elevation-01: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
+      --elevation-02: 0 2px 4px rgba(0, 0, 0, 0.12);
+      --shadow-primary: 0 3px 3px rgba(0, 121, 202, 0.15);
+      /* Ticket selector + legacy aliases */
+      --selector-blue: var(--color-primary);
+      --selector-blue-hover: var(--color-primary-hover);
+      --selector-blue-soft: var(--color-primary-weak);
+      --fev-blue: var(--color-primary);
+      --fev-blue-hover: var(--color-primary-hover);
+      --bg: var(--color-bg);
+      --bg-muted: var(--color-bg-neutral);
+      --border: var(--color-border);
+      --text: var(--color-text);
+      --text-muted: var(--color-text-subtle);
       --radius: 12px;
       --radius-sm: 8px;
-      --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+      --shadow: var(--elevation-01);
     }
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; -webkit-tap-highlight-color: transparent; }
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: var(--font);
+      background: var(--color-bg-neutral);
+      color: var(--color-text);
       line-height: 1.5;
-      padding-bottom: 5rem;
+      padding-bottom: 5.5rem;
     }
     @media (min-width: 1024px) {
       body { padding-bottom: 0; }
     }
 
-    /* —— Mock Fever header —— */
-    .fev-header {
+    /* —— Navbar (pruebaemi-style) —— */
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-bg);
+      border-bottom: 1px solid var(--color-border);
+    }
+    .navbar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0.75rem 1rem;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg);
-      position: sticky;
-      top: 0;
-      z-index: 50;
+      padding: 10px 16px;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    .fev-header__logo { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.03em; color: var(--fev-blue); }
-    .fev-header__meta { font-size: 0.8125rem; color: var(--text-muted); }
-
-    /* —— Hero gallery (Barça-inspired) —— */
-    .fev-hero {
-      display: grid;
-      grid-template-columns: 1.4fr 1fr;
-      gap: 4px;
-      min-height: 200px;
-      max-height: 360px;
-      background: #0a1628;
+    @media (min-width: 1024px) {
+      .navbar {
+        padding: 12px 24px;
+        box-shadow: 0 12px 12px rgba(0, 0, 0, 0.05);
+        border-bottom: none;
+      }
     }
-    @media (max-width: 640px) {
-      .fev-hero { grid-template-columns: 1fr; min-height: 220px; max-height: none; }
-      .fev-hero__grid { display: none; }
-    }
-    .fev-hero__main {
-      background: linear-gradient(135deg, #004d98 0%, #a50044 55%, #0a1628 100%);
+    .navbar .logo-link {
+      text-decoration: none;
       display: flex;
+      align-items: center;
+    }
+    .navbar .logo-link img {
+      height: 34px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .nav-icon-btn {
+      all: unset;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      color: var(--color-text);
+    }
+    .nav-icon-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* —— Hero carousel (Fever plan / pruebaemi) —— */
+    .fcb-hero {
+      position: relative;
+      width: 100%;
+      height: min(52vh, 420px);
+      max-height: 480px;
+      overflow: hidden;
+      background: #06232c;
+    }
+    .fcb-hero__track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .fcb-hero__slide {
+      min-width: 100%;
+      height: 100%;
+    }
+    .fcb-hero__slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .fcb-hero .nav-prev,
+    .fcb-hero .nav-next {
+      position: absolute;
+      top: 0;
+      bottom: 56px;
+      z-index: 3;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .fcb-hero .nav-prev { left: 0; width: 38%; }
+    .fcb-hero .nav-next { right: 0; width: 62%; }
+    .fcb-hero .side-buttons {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 4;
+    }
+    .fcb-hero .side-btn {
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--elevation-02);
+      cursor: pointer;
+    }
+    .fcb-hero .side-btn svg {
+      width: 18px;
+      height: 18px;
+      color: var(--color-text);
+    }
+    .fcb-hero .shadow-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
       align-items: flex-end;
-      padding: 1.25rem;
+      padding: 0 14px 14px;
+      gap: 12px;
+      z-index: 4;
+      pointer-events: none;
+    }
+    .fcb-hero .gallery-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: none;
+      border-radius: 4rem;
+      padding: 0 12px;
+      height: 32px;
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      color: var(--color-text);
+      pointer-events: auto;
+      box-shadow: var(--shadow-primary);
+    }
+    .fcb-hero .slide-indicators {
+      display: flex;
+      gap: 4px;
+      width: 100%;
+      pointer-events: none;
+    }
+    .fcb-hero .slide-indicators .bar {
+      flex: 1;
+      min-width: 0;
+      height: 3px;
+      border-radius: 64px;
+      background: rgba(255, 255, 255, 0.45);
+      overflow: hidden;
       position: relative;
     }
-    .fev-hero__main h2 {
-      margin: 0;
-      color: #fff;
-      font-size: clamp(1.25rem, 4vw, 1.75rem);
-      font-weight: 800;
+    .fcb-hero .slide-indicators .bar .fill {
+      position: absolute;
+      inset: 0;
+      width: 0;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 64px;
+      transition: width 0.35s ease;
+    }
+    .fcb-hero .slide-indicators .bar.done .fill { width: 100%; }
+    .fcb-hero .slide-indicators .bar.active .fill { width: 100%; }
+    .fcb-hero .rounded-top {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: var(--color-bg-neutral);
+      border-radius: 8px 8px 0 0;
+      z-index: 5;
+    }
+
+    /* —— Title + description (pruebaemi) —— */
+    .title-section {
+      padding: 16px 0 8px;
+    }
+    .tag-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 20px;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 16px;
+      margin-bottom: 10px;
+      background: var(--color-primary-weak);
+      color: var(--color-primary);
+    }
+    .title-section h1 {
+      font-size: clamp(1.15rem, 2.8vw, 1.35rem);
+      font-weight: 600;
+      line-height: 1.25;
+      margin: 0 0 6px;
+      color: var(--color-text);
       letter-spacing: -0.02em;
-      text-shadow: 0 1px 12px rgba(0,0,0,0.35);
     }
-    .fev-hero__grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 4px;
+    .title-section .subtitle {
+      font-size: 14px;
+      color: var(--color-text-subtle);
+      line-height: 20px;
+      margin: 0;
     }
-    .fev-hero__cell {
-      background: linear-gradient(160deg, #1e3a5f 0%, #0d2847 100%);
-      min-height: 0;
+    .description-lead {
+      padding: 8px 0 20px;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--color-text);
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: 8px;
     }
-    .fev-hero__cell:nth-child(2) { background: linear-gradient(160deg, #3d1a2e 0%, #1a0f18 100%); }
-    .fev-hero__cell:nth-child(3) { background: linear-gradient(160deg, #1a3d2e 0%, #0f1f18 100%); }
-    .fev-hero__cell:nth-child(4) { background: linear-gradient(160deg, #2e2a1a 0%, #18160f 100%); }
+    .description-lead p { margin: 0; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 0;
+      margin-top: 8px;
+      background: transparent;
+    }
+    .section-header img {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+      object-fit: contain;
+    }
+    .section-header h2 {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 24px;
+      margin: 0;
+      flex: 1;
+      color: var(--color-text);
+    }
+
+    .help-section,
+    .venue-wrap,
+    .location-wrap {
+      border-top: 1px solid var(--color-border);
+      margin-top: 8px;
+    }
+    .help-content {
+      padding: 8px 0 20px;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--color-text);
+    }
+    .help-content a {
+      color: var(--color-primary);
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .help-content a:hover { text-decoration: underline; }
+    .venue-section {
+      padding: 8px 0 20px;
+    }
+    .venue-section .venue-img {
+      width: 100%;
+      height: 200px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    .venue-section .venue-name-lg {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--color-text);
+    }
+    .venue-section .venue-desc {
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--color-text-subtle);
+      margin: 0;
+    }
+    .location {
+      padding: 8px 0 24px;
+    }
+    .location .loc-name {
+      font-weight: 600;
+      font-size: 14px;
+      margin-bottom: 4px;
+      color: var(--color-text);
+    }
+    .location .loc-address {
+      font-size: 14px;
+      color: var(--color-text-subtle);
+      margin-bottom: 12px;
+      line-height: 20px;
+    }
+    .location .map-placeholder {
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(180deg, #dbeafe 0%, #cbd5e1 100%);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--color-text-subtle);
+    }
+
+    .fcb-footer {
+      background: var(--color-text);
+      color: #fff;
+      padding: 28px 16px 48px;
+      margin-top: 0;
+    }
+    .fcb-footer-cols {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto 20px;
+    }
+    .fcb-footer-col h5 {
+      font-size: 13px;
+      font-weight: 600;
+      margin: 0 0 8px;
+    }
+    .fcb-footer-col ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .fcb-footer-col li {
+      font-size: 13px;
+      line-height: 20px;
+      margin-bottom: 4px;
+    }
+    .fcb-footer-col a {
+      color: rgba(255, 255, 255, 0.72);
+      text-decoration: none;
+    }
+    .fcb-footer-col a:hover { color: #fff; }
+    .fcb-footer .legal {
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 14px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.5);
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .fcb-footer .legal a { color: rgba(255, 255, 255, 0.85); }
+
+    .txt-subtle {
+      color: var(--color-text-subtle);
+      font-size: 14px;
+      line-height: 20px;
+      margin: 0 0 10px;
+    }
 
     /* —— Layout: main + sticky sidebar —— */
     .fev-layout {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 1.25rem 1rem 3rem;
+      padding: 0 16px 32px;
       display: grid;
       grid-template-columns: 1fr;
-      gap: 1.5rem;
+      gap: 1.25rem;
+    }
+    .fev-layout > main {
+      background: var(--color-bg);
+      border-radius: 0;
+      padding: 0 0 8px;
     }
     @media (min-width: 1024px) {
       .fev-layout {
-        grid-template-columns: 1fr min(340px, 32%);
+        grid-template-columns: 1fr min(360px, 34%);
         align-items: start;
-        gap: 2rem;
-        padding: 1.5rem 1.5rem 4rem;
+        gap: 1.75rem;
+        padding: 16px 24px 48px;
+      }
+      .fev-layout > main {
+        padding: 8px 8px 16px 0;
+        border-radius: 0;
       }
     }
 
-    .fev-title-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-bottom: 0.5rem;
+    .pd-description {
+      padding: 16px 0;
+      font-size: 14px;
+      line-height: 20px;
     }
-    .fev-title-row h1 {
-      margin: 0;
-      font-size: clamp(1.5rem, 3.5vw, 2rem);
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.2;
-    }
-    .fev-title-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
-    .fev-icon-btn {
-      width: 40px; height: 40px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      background: var(--bg);
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-      font-size: 1.1rem;
-    }
-
-    .fev-quickgrid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem 1rem;
-      margin: 1.25rem 0 1.5rem;
-      font-size: 0.875rem;
-      color: var(--text-muted);
-    }
-    @media (max-width: 480px) {
-      .fev-quickgrid { grid-template-columns: 1fr; }
-    }
-    .fev-quickgrid__item { display: flex; gap: 0.5rem; align-items: flex-start; }
-    .fev-quickgrid__item strong { color: var(--text); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.15rem; }
-
     .pd-description p {
-      margin: 0 0 1rem;
-      color: var(--text);
-      font-size: 0.9375rem;
+      margin: 0 0 12px;
+      color: var(--color-text);
     }
     .pd-description p:last-child { margin-bottom: 0; }
 
     .pd-section__title {
-      font-size: 1.125rem;
-      font-weight: 700;
-      margin: 1.75rem 0 0.75rem;
-      color: var(--text);
+      font-size: 16px;
+      font-weight: 600;
+      margin: 18px 0 8px;
+      color: var(--color-text);
     }
+    .pd-description .pd-section__title:first-of-type { margin-top: 0; }
     .pd-section__list {
       list-style: none;
       margin: 0;
@@ -171,28 +477,30 @@
       display: flex;
       gap: 0.5rem;
       align-items: flex-start;
-      padding: 0.4rem 0;
-      font-size: 0.9375rem;
+      padding: 0.35rem 0;
+      font-size: 14px;
+      line-height: 20px;
     }
-    .pd-section__text a { color: var(--fev-blue); text-decoration: none; }
+    .pd-section__text a { color: var(--color-primary); text-decoration: none; font-weight: 600; }
     .pd-section__text a:hover { text-decoration: underline; }
 
-    /* —— Feature pills (like Fever icon grid) —— */
+    /* —— Feature pills —— */
     .fev-features {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 0.75rem;
-      margin: 1.25rem 0 0;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 10px;
+      margin: 16px 0 8px;
     }
     .fev-feature {
-      background: var(--bg-muted);
-      border-radius: var(--radius-sm);
-      padding: 0.75rem;
-      font-size: 0.8125rem;
+      background: var(--color-bg-neutral);
+      border-radius: 8px;
+      padding: 12px 10px;
+      font-size: 12px;
       text-align: center;
+      border: 1px solid transparent;
     }
-    .fev-feature__icon { font-size: 1.35rem; display: block; margin-bottom: 0.35rem; }
-    .fev-feature__label { font-weight: 600; color: var(--text); line-height: 1.3; }
+    .fev-feature__icon { font-size: 1.25rem; display: block; margin-bottom: 6px; }
+    .fev-feature__label { font-weight: 600; color: var(--color-text); line-height: 1.35; }
 
     /* —— Ticket carousel (Fever-style: full cards, no clipping) —— */
     .ticket-carousel-section { margin: 2rem 0 1.5rem; }
@@ -333,17 +641,18 @@
       padding: 0.65rem 1rem;
       font-size: 0.875rem;
       font-weight: 600;
+      font-family: var(--font);
       text-align: center;
-      color: var(--fev-blue);
-      background: var(--bg);
-      border: 2px solid var(--fev-blue);
+      color: var(--color-primary);
+      background: var(--color-bg);
+      border: 2px solid var(--color-primary);
       border-radius: var(--radius-sm);
       cursor: pointer;
       text-decoration: none;
       transition: background 0.15s, color 0.15s;
     }
     .ticket-card__btn:hover {
-      background: rgba(50, 87, 255, 0.06);
+      background: var(--color-primary-weak);
     }
 
     .ticket-carousel__dots {
@@ -358,12 +667,12 @@
       border-radius: 50%;
       border: none;
       padding: 0;
-      background: #d4d4d8;
+      background: #cbd5e1;
       cursor: pointer;
       transition: transform 0.15s, background 0.15s;
     }
     .ticket-carousel__dot[aria-current="true"] {
-      background: var(--fev-blue);
+      background: var(--color-primary);
       transform: scale(1.15);
     }
 
@@ -685,25 +994,6 @@
     }
     .ticket-selector__cta:hover { background: var(--selector-blue-hover); }
 
-    /* —— Info + map blocks —— */
-    .fev-info-block {
-      margin-top: 2rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
-    }
-    .fev-map-placeholder {
-      margin-top: 0.75rem;
-      height: 180px;
-      background: linear-gradient(180deg, #e0f2fe 0%, #cbd5e1 100%);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      border: 1px solid var(--border);
-    }
-
     /* —— Mobile sticky CTA —— */
     .fev-sticky-cta {
       display: flex;
@@ -711,23 +1001,18 @@
       bottom: 0;
       left: 0;
       right: 0;
-      padding: 0.75rem 1rem;
-      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
-      z-index: 40;
+      padding: 12px 16px max(12px, env(safe-area-inset-bottom));
+      background: transparent;
+      z-index: 200;
     }
-    .fev-sticky-cta button {
-      flex: 1;
-      padding: 0.85rem 1rem;
-      font-size: 1rem;
-      font-weight: 700;
-      color: #fff;
-      background: var(--fev-blue);
-      border: none;
-      border-radius: var(--radius-sm);
-      cursor: pointer;
+    .fev-sticky-cta .ticket-selector__cta {
+      width: 100%;
+      height: 48px;
+      font-family: var(--font);
+      font-weight: 600;
+      font-size: 16px;
+      border-radius: 64px;
+      box-shadow: var(--elevation-02);
     }
     @media (min-width: 1024px) {
       .fev-sticky-cta { display: none; }
@@ -735,58 +1020,50 @@
   </style>
 </head>
 <body>
-  <header class="fev-header" aria-label="Preview header">
-    <span class="fev-header__logo">fever</span>
-    <span class="fev-header__meta">Barcelona · Preview</span>
+  <header class="sticky-header">
+    <nav class="navbar" aria-label="Main">
+      <a href="#" class="logo-link"><img src="img/fever-logo.svg" width="120" height="38" alt="Fever"></a>
+      <div class="nav-icons">
+        <a class="nav-icon-btn" href="#" aria-label="Search"><svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M384 208A176 176 0 1 0 32 208a176 176 0 1 0 352 0zM343.3 366C307 397.2 259.7 416 208 416C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208c0 51.7-18.8 99-50 135.3L507.3 484.7c6.2 6.2 6.2 16.4 0 22.6s-16.4 6.2-22.6 0L343.3 366z"/></svg></a>
+        <a class="nav-icon-btn" href="#" aria-label="Favorites"><svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M244 130.6l-12-13.5-4.2-4.7c-26-29.2-65.3-42.8-103.8-35.8c-53.3 9.7-92 56.1-92 110.3v3.5c0 32.3 13.4 63.1 37.1 85.1L253 446.8c.8 .7 1.9 1.2 3 1.2s2.2-.4 3-1.2L443 275.5c23.6-22 37-52.8 37-85.1v-3.5c0-54.2-38.7-100.6-92-110.3c-38.5-7-77.8 6.6-103.8 35.8l-4.2 4.7-12 13.5c-3 3.4-7.4 5.4-12 5.4s-8.9-2-12-5.4z"/></svg></a>
+        <a class="nav-icon-btn" href="#" aria-label="Profile"><svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M406.5 399.6C387.4 352.9 341.5 320 288 320l-64 0c-53.5 0-99.4 32.9-118.5 79.6C69.9 362.2 48 311.7 48 256C48 141.1 141.1 48 256 48s208 93.1 208 208c0 55.7-21.9 106.2-57.5 143.6zm-40.1 32.7C334.4 452.4 296.6 464 256 464s-78.4-11.6-110.5-31.7c7.3-36.7 39.7-64.3 78.5-64.3l64 0c38.8 0 71.2 27.6 78.5 64.3zM256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512z"/></svg></a>
+      </div>
+    </nav>
   </header>
 
-  <section class="fev-hero" aria-label="Gallery">
-    <div class="fev-hero__main">
-      <h2>Barça Museum · Immersive Tour</h2>
+  <section class="fcb-hero" id="fcbHero" aria-label="Gallery">
+    <div class="fcb-hero__track" id="fcbHeroTrack">
+      <div class="fcb-hero__slide"><img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=1200&q=80" alt=""></div>
+      <div class="fcb-hero__slide"><img src="https://images.unsplash.com/photo-1522778119026-d647f0565c6f?w=1200&q=80" alt=""></div>
+      <div class="fcb-hero__slide"><img src="https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=1200&q=80" alt=""></div>
+      <div class="fcb-hero__slide"><img src="https://images.unsplash.com/photo-1459865264687-595dec57765b?w=1200&q=80" alt=""></div>
     </div>
-    <div class="fev-hero__grid" aria-hidden="true">
-      <div class="fev-hero__cell"></div>
-      <div class="fev-hero__cell"></div>
-      <div class="fev-hero__cell"></div>
-      <div class="fev-hero__cell"></div>
+    <button type="button" class="nav-prev" id="fcbHeroPrev" aria-label="Previous image"></button>
+    <button type="button" class="nav-next" id="fcbHeroNext" aria-label="Next image"></button>
+    <div class="side-buttons">
+      <button type="button" class="side-btn" aria-label="Save"><svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M244 130.6l-12-13.5-4.2-4.7c-26-29.2-65.3-42.8-103.8-35.8c-53.3 9.7-92 56.1-92 110.3v3.5c0 32.3 13.4 63.1 37.1 85.1L253 446.8c.8 .7 1.9 1.2 3 1.2s2.2-.4 3-1.2L443 275.5c23.6-22 37-52.8 37-85.1v-3.5c0-54.2-38.7-100.6-92-110.3c-38.5-7-77.8 6.6-103.8 35.8l-4.2 4.7-12 13.5c-3 3.4-7.4 5.4-12 5.4s-8.9-2-12-5.4z"/></svg></button>
+      <button type="button" class="side-btn" aria-label="Share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8M16 6l-4-4-4 4M12 2v13"/></svg></button>
     </div>
+    <div class="shadow-overlay">
+      <button type="button" class="gallery-btn" id="fcbGalleryBtn"><svg viewBox="0 0 512 512" fill="currentColor" width="16" height="16" aria-hidden="true"><path d="M224 80c0-26.5-21.5-48-48-48H80C53.5 32 32 53.5 32 80v96c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V80zm0 256c0-26.5-21.5-48-48-48H80c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V336zM288 80v96c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48H336c-26.5 0-48 21.5-48 48zM480 336c0-26.5-21.5-48-48-48H336c-26.5 0-48 21.5-48 48v96c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48V336z"/></svg>Gallery</button>
+      <div class="slide-indicators" id="fcbHeroBars" aria-hidden="true"></div>
+    </div>
+    <div class="rounded-top" aria-hidden="true"></div>
   </section>
 
   <div class="fev-layout">
     <main>
-      <div class="fev-title-row">
+      <div class="title-section">
+        <span class="tag-badge">Tours &amp; Museum · Barcelona</span>
         <h1>FC Barcelona Museum — Barça Immersive Tour</h1>
-        <div class="fev-title-actions">
-          <button type="button" class="fev-icon-btn" aria-label="Share">↗</button>
-          <button type="button" class="fev-icon-btn" aria-label="Save">♡</button>
-        </div>
+        <p class="subtitle">Spotify Camp Nou area · Digital audio guide · ~90 min visit (varies by ticket)</p>
       </div>
 
-      <div class="fev-quickgrid">
-        <div class="fev-quickgrid__item">
-          <span aria-hidden="true">📍</span>
-          <div><strong>Location</strong> Spotify Camp Nou area — Barça Immersive Tour, Barcelona</div>
-        </div>
-        <div class="fev-quickgrid__item">
-          <span aria-hidden="true">📅</span>
-          <div><strong>Dates &amp; times</strong> Choose your visit in the ticket selector</div>
-        </div>
-        <div class="fev-quickgrid__item">
-          <span aria-hidden="true">⏱</span>
-          <div><strong>Duration</strong> Allow around 90 minutes (varies by ticket)</div>
-        </div>
-        <div class="fev-quickgrid__item">
-          <span aria-hidden="true">👤</span>
-          <div><strong>Ages</strong> All ages welcome. Conditions may apply for certain activities</div>
-        </div>
-        <div class="fev-quickgrid__item">
-          <span aria-hidden="true">♿</span>
-          <div><strong>Accessibility</strong> Information available on the official FC Barcelona site</div>
-        </div>
+      <div class="description-lead">
+        <p>While <strong>Spotify Camp Nou</strong> is being transformed, the <strong>FC Barcelona Museum</strong> welcomes you to the <strong>Barça Immersive Tour</strong>: a temporary space of around <strong>2,400&nbsp;m²</strong> where you can dive into the club’s history, trophies, and interactive experiences. Book your tickets and feel the Barça spirit.</p>
       </div>
 
       <div class="pd-description">
-        <p>While <strong>Spotify Camp Nou</strong> is being transformed, the <strong>FC Barcelona Museum</strong> welcomes you to the <strong>Barça Immersive Tour</strong>: a temporary space of around <strong>2,400&nbsp;m²</strong> where you can dive into the club’s history, trophies, and interactive experiences. Book your tickets and feel the Barça spirit.</p>
 
         <h2 class="pd-section__title">Highlights</h2>
         <ul class="pd-section__list">
@@ -806,7 +1083,7 @@
 
         <section class="ticket-carousel-section" aria-labelledby="ticket-types-heading">
           <h2 class="pd-section__title" id="ticket-types-heading">Ticket types</h2>
-          <p style="font-size:0.9375rem;color:var(--text-muted);margin:0 0 0.75rem;">Swipe or use the arrows to compare options — same tiers as on the official Barça ticketing page.</p>
+          <p class="txt-subtle">Swipe or use the arrows to compare options — same tiers as on the official Barça ticketing page.</p>
 
           <div class="ticket-carousel" data-carousel>
             <div class="ticket-carousel__controls-top">
@@ -888,10 +1165,38 @@
         <p>Finish with the <strong>construction viewpoint</strong> to follow the transformation of Spotify Camp Nou. Choose <strong>Basic Ticket</strong>, <strong>Total Experience</strong>, <strong>Virtual Experience</strong>, or <strong>Flexible Basic Ticket</strong> and secure your visit.</p>
       </div>
 
-      <div class="fev-info-block">
-        <h2 class="pd-section__title">Getting there</h2>
-        <p style="margin:0 0 0.5rem;font-size:0.9375rem;color:var(--text-muted);">Spotify Camp Nou area — follow directions on your ticket and on the official site.</p>
-        <div class="fev-map-placeholder" role="img" aria-label="Map placeholder">Map · embed in production</div>
+      <div class="help-section">
+        <div class="section-header">
+          <img src="img/fa-circle-question.svg" alt="" width="24" height="24">
+          <h2>Need help?</h2>
+        </div>
+        <div class="help-content">
+          Contact Fever Support <a href="https://feverup.com" rel="noopener noreferrer">here</a>. For venue-specific questions, see the <a href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">FC Barcelona</a> help centre.
+        </div>
+      </div>
+
+      <div class="venue-wrap">
+        <div class="section-header">
+          <img src="img/fa-building-columns.svg" alt="" width="24" height="24">
+          <h2>About the venue</h2>
+        </div>
+        <div class="venue-section">
+          <img class="venue-img" src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=800&q=80" alt="Camp Nou stadium atmosphere">
+          <div class="venue-name-lg">Barça Immersive Tour · FC Barcelona Museum</div>
+          <p class="venue-desc">A temporary museum experience while Spotify Camp Nou is transformed: trophies, history, Messi Zone, 360° room, RoboKeeper, and Barça Virtual Dream — plus a viewpoint over the new stadium works.</p>
+        </div>
+      </div>
+
+      <div class="location-wrap">
+        <div class="section-header">
+          <img src="img/fa-location-dot.svg" alt="" width="24" height="24">
+          <h2>Getting there</h2>
+        </div>
+        <div class="location">
+          <div class="loc-name">Spotify Camp Nou area</div>
+          <div class="loc-address">Barça Immersive Tour — follow the address and access instructions on your ticket and on the official FC Barcelona site.</div>
+          <div class="map-placeholder" role="img" aria-label="Map placeholder">Map · embed in production</div>
+        </div>
       </div>
     </main>
 
@@ -979,11 +1284,70 @@
     </aside>
   </div>
 
+  <footer class="fcb-footer">
+    <div class="fcb-footer-cols">
+      <div class="fcb-footer-col">
+        <h5>About Fever</h5>
+        <ul>
+          <li><a href="https://feverup.com" rel="noopener noreferrer">Press</a></li>
+          <li><a href="https://feverup.com" rel="noopener noreferrer">Careers</a></li>
+          <li><a href="https://feverup.com" rel="noopener noreferrer">Gift cards</a></li>
+        </ul>
+      </div>
+      <div class="fcb-footer-col">
+        <h5>Partner with us</h5>
+        <ul>
+          <li><a href="https://feverup.com" rel="noopener noreferrer">List your event</a></li>
+          <li><a href="https://feverup.com" rel="noopener noreferrer">Corporate</a></li>
+        </ul>
+      </div>
+      <div class="fcb-footer-col">
+        <h5>Follow us</h5>
+        <ul>
+          <li><a href="https://feverup.com" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://feverup.com" rel="noopener noreferrer">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal"><a href="https://feverup.com" rel="noopener noreferrer">Terms of Use</a> · <a href="https://feverup.com" rel="noopener noreferrer">Privacy</a> · Preview page — FC Barcelona Museum</div>
+  </footer>
+
   <div class="fev-sticky-cta">
     <button type="button" class="ticket-selector__cta" id="ticketSelectorCtaSticky">€28.00 — Get it</button>
   </div>
 
   <script>
+    (function () {
+      var track = document.getElementById("fcbHeroTrack");
+      var barsWrap = document.getElementById("fcbHeroBars");
+      var prev = document.getElementById("fcbHeroPrev");
+      var next = document.getElementById("fcbHeroNext");
+      if (!track || !barsWrap) return;
+      var slides = track.querySelectorAll(".fcb-hero__slide");
+      var n = slides.length;
+      var i = 0;
+      for (var b = 0; b < n; b++) {
+        var bar = document.createElement("div");
+        bar.className = "bar" + (b === 0 ? " active" : "");
+        var fill = document.createElement("div");
+        fill.className = "fill";
+        bar.appendChild(fill);
+        barsWrap.appendChild(bar);
+      }
+      var bars = barsWrap.querySelectorAll(".bar");
+      function go(idx) {
+        i = (idx % n + n) % n;
+        track.style.transform = "translateX(" + -i * 100 + "%)";
+        for (var j = 0; j < bars.length; j++) {
+          bars[j].classList.remove("active", "done");
+          if (j < i) bars[j].classList.add("done");
+          else if (j === i) bars[j].classList.add("active");
+        }
+      }
+      if (prev) prev.addEventListener("click", function () { go(i - 1); });
+      if (next) next.addEventListener("click", function () { go(i + 1); });
+    })();
+
     (function () {
       var root = document.querySelector("[data-carousel]");
       if (!root) return;
