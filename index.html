@@ -6,6 +6,10 @@
   <title>Barça Museum — FC Barcelona Immersive Tour</title>
   <style>
     :root {
+      /* Fever ticket selector (reference UI) */
+      --selector-blue: #0077c8;
+      --selector-blue-hover: #006aad;
+      --selector-blue-soft: #e6f4fc;
       --fev-blue: #3257ff;
       --fev-blue-hover: #2547e6;
       --bg: #ffffff;
@@ -363,49 +367,323 @@
       transform: scale(1.15);
     }
 
-    /* —— Sticky sidebar (desktop) —— */
+    /* —— Ticket selector (Fever-style: tabs + tier carousel + perforated rows) —— */
     .fev-sidebar {
-      display: none;
+      display: block;
+      width: 100%;
+      max-width: 420px;
+      margin: 0 auto;
     }
     @media (min-width: 1024px) {
       .fev-sidebar {
-        display: block;
+        max-width: none;
+        margin: 0;
         position: sticky;
         top: 72px;
       }
     }
-    .fev-sidebar__card {
+    @media (max-width: 1023px) {
+      .fev-sidebar { order: -1; }
+    }
+
+    .ticket-selector {
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 1.25rem;
-      background: var(--bg);
+      padding: 1rem;
     }
-    .fev-sidebar__label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
-    .fev-sidebar__row {
+
+    .ticket-selector__head {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 0.65rem 0;
+      gap: 0.5rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.75rem;
       border-bottom: 1px solid var(--border);
-      font-size: 0.875rem;
     }
-    .fev-sidebar__row:last-of-type { border-bottom: none; }
-    .fev-sidebar__price { font-weight: 700; }
-    .fev-sidebar__cta {
+    .ticket-selector__head-icon {
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+    .ticket-selector__head-icon svg { width: 20px; height: 20px; }
+    .ticket-selector__title {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .ticket-selector__primary-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .ticket-selector__ptab {
+      position: relative;
+      padding: 0.65rem 0.5rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text-muted);
+      cursor: pointer;
+      text-align: center;
+      line-height: 1.25;
+    }
+    .ticket-selector__ptab.is-active {
+      border-color: var(--selector-blue);
+      color: var(--selector-blue);
+      background: #fff;
+    }
+    .ticket-selector__ptab .ticket-selector__corner-check {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, transparent 50%, var(--selector-blue) 50%);
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 1px 3px 0 0;
+      font-size: 9px;
+      color: #fff;
+      line-height: 1;
+      border-radius: 0 var(--radius-sm) 0 0;
+    }
+    .ticket-selector__ptab.is-active .ticket-selector__corner-check { display: flex; }
+    .ticket-selector__corner-check::after { content: "✓"; font-weight: 800; }
+
+    .ticket-selector__tier-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .ticket-selector__tier-nav {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 6px;
+      background: var(--bg-muted);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 1rem;
+      line-height: 1;
+      display: grid;
+      place-items: center;
+    }
+    .ticket-selector__tier-nav:hover { background: #e4e4e7; }
+    .ticket-selector__tier-scroll {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      gap: 0.45rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 4px 2px 8px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .ticket-selector__tier-scroll::-webkit-scrollbar { display: none; }
+    .ticket-selector__tier {
+      position: relative;
+      flex: 0 0 auto;
+      padding: 0.45rem 1.75rem 0.45rem 0.65rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: 0.01em;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .ticket-selector__tier.is-active {
+      border-color: var(--selector-blue);
+      color: var(--selector-blue);
+    }
+    .ticket-selector__tier .ticket-selector__corner-check {
+      display: none;
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 18px;
+      height: 18px;
+      background: linear-gradient(135deg, transparent 50%, var(--selector-blue) 50%);
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: 0 2px 0 0;
+      font-size: 8px;
+      color: #fff;
+      line-height: 1;
+      border-radius: 0 var(--radius-sm) 0 0;
+    }
+    .ticket-selector__tier.is-active .ticket-selector__corner-check { display: flex; }
+
+    .ticket-selector__rows {
+      list-style: none;
+      margin: 0 0 1rem;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .ticket-row {
+      display: grid;
+      grid-template-columns: 1fr 14px minmax(108px, 34%);
+      align-items: stretch;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: visible;
+      position: relative;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .ticket-row.is-selected {
+      border: 2px solid var(--selector-blue);
+      box-shadow: 0 0 0 1px rgba(0, 119, 200, 0.15);
+    }
+    .ticket-row.is-selected .ticket-row__stub {
+      background: var(--selector-blue-soft);
+    }
+    .ticket-row__info {
+      padding: 0.75rem 0.65rem 0.75rem 0.85rem;
+      min-width: 0;
+    }
+    .ticket-row__line {
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+    }
+    .ticket-row__more {
+      display: inline-block;
+      margin-top: 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--selector-blue);
+      text-decoration: none;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+    }
+    .ticket-row__more:hover { text-decoration: underline; }
+    .ticket-row__price {
+      margin-top: 0.35rem;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .ticket-row__tear {
+      position: relative;
+      width: 14px;
+      flex-shrink: 0;
+      background: var(--bg);
+      border-left: 2px dashed #cbd5e1;
+    }
+    .ticket-row__tear::before,
+    .ticket-row__tear::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      width: 11px;
+      height: 11px;
+      margin-left: -5px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .ticket-row.is-selected .ticket-row__tear::before,
+    .ticket-row.is-selected .ticket-row__tear::after {
+      background: #fff;
+    }
+    .ticket-row.is-selected .ticket-row__tear::before,
+    .ticket-row.is-selected .ticket-row__tear::after {
+      border-color: var(--selector-blue);
+    }
+    .ticket-row__tear::before { top: -7px; }
+    .ticket-row__tear::after { bottom: -7px; }
+
+    .ticket-row__stub {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem;
+      background: #fafafa;
+      border-radius: 0 8px 8px 0;
+    }
+    .ticket-row.is-selected .ticket-row__stub { background: var(--selector-blue-soft); }
+
+    .ticket-row__stepper {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 2px 4px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .ticket-row.is-selected .ticket-row__stepper {
+      border-color: rgba(0, 119, 200, 0.35);
+    }
+    .ticket-row__step {
+      width: 28px;
+      height: 28px;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1;
+      cursor: pointer;
+      color: var(--text-muted);
+      display: grid;
+      place-items: center;
+    }
+    .ticket-row__step--plus { color: var(--selector-blue); }
+    .ticket-row__step:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+    .ticket-row__qty {
+      min-width: 1.25rem;
+      text-align: center;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .ticket-selector__cta {
       display: block;
       width: 100%;
-      margin-top: 1rem;
-      padding: 0.85rem 1rem;
+      padding: 0.9rem 1rem;
       font-size: 1rem;
       font-weight: 700;
       color: #fff;
-      background: var(--fev-blue);
+      background: var(--selector-blue);
       border: none;
-      border-radius: var(--radius-sm);
+      border-radius: 999px;
       cursor: pointer;
+      transition: background 0.15s;
     }
-    .fev-sidebar__cta:hover { background: var(--fev-blue-hover); }
+    .ticket-selector__cta:hover { background: var(--selector-blue-hover); }
 
     /* —— Info + map blocks —— */
     .fev-info-block {
@@ -617,18 +895,92 @@
       </div>
     </main>
 
-    <aside class="fev-sidebar" aria-label="Ticket box">
-      <div class="fev-sidebar__card">
-        <div class="fev-sidebar__label">From price</div>
-        <div class="fev-sidebar__row"><span>Basic Ticket</span><span class="fev-sidebar__price">€28</span></div>
-        <div class="fev-sidebar__row"><span>Total Experience</span><span class="fev-sidebar__price">€49</span></div>
-        <button type="button" class="fev-sidebar__cta">Tickets from €28</button>
+    <aside class="fev-sidebar" aria-label="Ticket selector">
+      <div class="ticket-selector" id="ticketSelectorWidget">
+        <div class="ticket-selector__head">
+          <span class="ticket-selector__head-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </span>
+          <h2 class="ticket-selector__title">Select date and session</h2>
+        </div>
+
+        <div class="ticket-selector__primary-tabs" role="tablist" aria-label="Ticket category">
+          <button type="button" class="ticket-selector__ptab is-active" role="tab" aria-selected="true" data-primary="dated">
+            <span class="ticket-selector__corner-check" aria-hidden="true"></span>
+            Dated visit
+          </button>
+          <button type="button" class="ticket-selector__ptab" role="tab" aria-selected="false" data-primary="open">
+            <span class="ticket-selector__corner-check" aria-hidden="true"></span>
+            Open-date ticket
+          </button>
+        </div>
+
+        <div class="ticket-selector__tier-wrap">
+          <button type="button" class="ticket-selector__tier-nav ticket-selector__tier-nav--prev" aria-label="Previous ticket types">‹</button>
+          <div class="ticket-selector__tier-scroll" id="tierScroll">
+            <button type="button" class="ticket-selector__tier is-active" data-tier="basic" data-unit="28"><span class="ticket-selector__corner-check" aria-hidden="true"></span>Basic Ticket</button>
+            <button type="button" class="ticket-selector__tier" data-tier="total" data-unit="49"><span class="ticket-selector__corner-check" aria-hidden="true"></span>Total Experience</button>
+            <button type="button" class="ticket-selector__tier" data-tier="virtual" data-unit="42"><span class="ticket-selector__corner-check" aria-hidden="true"></span>Virtual Experience</button>
+            <button type="button" class="ticket-selector__tier" data-tier="flex" data-unit="36"><span class="ticket-selector__corner-check" aria-hidden="true"></span>Flexible Basic</button>
+          </div>
+          <button type="button" class="ticket-selector__tier-nav ticket-selector__tier-nav--next" aria-label="Next ticket types">›</button>
+        </div>
+
+        <ul class="ticket-selector__rows">
+          <li class="ticket-row is-selected" data-session="1">
+            <div class="ticket-row__info">
+              <div class="ticket-row__line">Sat 21 Jun 2026 — 10:30 entry</div>
+              <button type="button" class="ticket-row__more">More info</button>
+              <div class="ticket-row__price" data-line-price>€28.00</div>
+            </div>
+            <div class="ticket-row__tear" aria-hidden="true"></div>
+            <div class="ticket-row__stub">
+              <div class="ticket-row__stepper">
+                <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
+                <span class="ticket-row__qty" data-qty>1</span>
+                <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
+              </div>
+            </div>
+          </li>
+          <li class="ticket-row" data-session="2">
+            <div class="ticket-row__info">
+              <div class="ticket-row__line">Sat 21 Jun 2026 — 14:00 entry</div>
+              <button type="button" class="ticket-row__more">More info</button>
+              <div class="ticket-row__price" data-line-price>€0.00</div>
+            </div>
+            <div class="ticket-row__tear" aria-hidden="true"></div>
+            <div class="ticket-row__stub">
+              <div class="ticket-row__stepper">
+                <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
+                <span class="ticket-row__qty" data-qty>0</span>
+                <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
+              </div>
+            </div>
+          </li>
+          <li class="ticket-row" data-session="3">
+            <div class="ticket-row__info">
+              <div class="ticket-row__line">Sat 21 Jun 2026 — 16:30 entry</div>
+              <button type="button" class="ticket-row__more">More info</button>
+              <div class="ticket-row__price" data-line-price>€0.00</div>
+            </div>
+            <div class="ticket-row__tear" aria-hidden="true"></div>
+            <div class="ticket-row__stub">
+              <div class="ticket-row__stepper">
+                <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
+                <span class="ticket-row__qty" data-qty>0</span>
+                <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <button type="button" class="ticket-selector__cta" id="ticketSelectorCta">€28.00 — Get it</button>
       </div>
     </aside>
   </div>
 
   <div class="fev-sticky-cta">
-    <button type="button">Tickets from €28</button>
+    <button type="button" class="ticket-selector__cta" id="ticketSelectorCtaSticky">€28.00 — Get it</button>
   </div>
 
   <script>
@@ -709,6 +1061,111 @@
 
       updateArrows();
       updateDots();
+    })();
+
+    /* Ticket selector: tiers, steppers, totals (Fever-style) */
+    (function () {
+      var widget = document.getElementById("ticketSelectorWidget");
+      if (!widget) return;
+
+      var tierScroll = document.getElementById("tierScroll");
+      var tiers = Array.prototype.slice.call(widget.querySelectorAll(".ticket-selector__tier"));
+      var primaryTabs = Array.prototype.slice.call(widget.querySelectorAll(".ticket-selector__ptab"));
+      var rows = Array.prototype.slice.call(widget.querySelectorAll(".ticket-row"));
+      var ctaMain = document.getElementById("ticketSelectorCta");
+      var ctaSticky = document.getElementById("ticketSelectorCtaSticky");
+
+      function getUnit() {
+        for (var i = 0; i < tiers.length; i++) {
+          if (tiers[i].classList.contains("is-active")) {
+            return parseFloat(tiers[i].getAttribute("data-unit") || "0", 10);
+          }
+        }
+        return 0;
+      }
+
+      function formatMoney(n) {
+        var s = n.toFixed(2);
+        var parts = s.split(".");
+        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        return "€" + parts.join(".");
+      }
+
+      function syncRow(row) {
+        var qtyEl = row.querySelector("[data-qty]");
+        var priceEl = row.querySelector("[data-line-price]");
+        var minus = row.querySelector(".ticket-row__step--minus");
+        var plus = row.querySelector(".ticket-row__step--plus");
+        var qty = parseInt(qtyEl.textContent, 10) || 0;
+        var unit = getUnit();
+        var sub = unit * qty;
+        if (priceEl) priceEl.textContent = formatMoney(sub);
+        if (minus) minus.disabled = qty <= 0;
+        if (plus) plus.disabled = qty >= 10;
+        row.classList.toggle("is-selected", qty > 0);
+      }
+
+      function totalCents() {
+        var unit = getUnit();
+        return rows.reduce(function (sum, row) {
+          var q = parseInt(row.querySelector("[data-qty]").textContent, 10) || 0;
+          return sum + Math.round(unit * q * 100);
+        }, 0);
+      }
+
+      function updateTotals() {
+        rows.forEach(syncRow);
+        var euros = totalCents() / 100;
+        var label = formatMoney(euros) + " — Get it";
+        if (ctaMain) ctaMain.textContent = label;
+        if (ctaSticky) ctaSticky.textContent = label;
+      }
+
+      primaryTabs.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          primaryTabs.forEach(function (b) {
+            b.classList.toggle("is-active", b === btn);
+            b.setAttribute("aria-selected", b === btn ? "true" : "false");
+          });
+        });
+      });
+
+      tiers.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          tiers.forEach(function (b) { b.classList.toggle("is-active", b === btn); });
+          updateTotals();
+        });
+      });
+
+      var prevTier = widget.querySelector(".ticket-selector__tier-nav--prev");
+      var nextTier = widget.querySelector(".ticket-selector__tier-nav--next");
+      if (tierScroll && prevTier && nextTier) {
+        prevTier.addEventListener("click", function () {
+          tierScroll.scrollBy({ left: -140, behavior: "smooth" });
+        });
+        nextTier.addEventListener("click", function () {
+          tierScroll.scrollBy({ left: 140, behavior: "smooth" });
+        });
+      }
+
+      rows.forEach(function (row) {
+        var minus = row.querySelector(".ticket-row__step--minus");
+        var plus = row.querySelector(".ticket-row__step--plus");
+        var qtyEl = row.querySelector("[data-qty]");
+        if (!minus || !plus || !qtyEl) return;
+        minus.addEventListener("click", function () {
+          var q = Math.max(0, (parseInt(qtyEl.textContent, 10) || 0) - 1);
+          qtyEl.textContent = String(q);
+          updateTotals();
+        });
+        plus.addEventListener("click", function () {
+          var q = Math.min(10, (parseInt(qtyEl.textContent, 10) || 0) + 1);
+          qtyEl.textContent = String(q);
+          updateTotals();
+        });
+      });
+
+      updateTotals();
     })();
   </script>
 </body>
