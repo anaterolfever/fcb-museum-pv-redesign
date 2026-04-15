@@ -1,37 +1,125 @@
+<style>
+/* Fever-like product description + ticket carousel (embed). */
+.pd-description { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #18181b; line-height: 1.5; font-size: 0.9375rem; }
+.pd-description p { margin: 0 0 1rem; }
+.pd-section__title { font-size: 1.125rem; font-weight: 700; margin: 1.5rem 0 0.65rem; color: #18181b; }
+.pd-section__list { list-style: none; margin: 0; padding: 0; }
+.pd-section__item { display: flex; gap: 0.5rem; padding: 0.35rem 0; align-items: flex-start; }
+.pd-section__text a { color: #3257ff; text-decoration: none; }
+.pd-section__text a:hover { text-decoration: underline; }
+.ticket-carousel-section { margin: 1.75rem 0; }
+.ticket-carousel { position: relative; margin: 0 -0.25rem; }
+.ticket-carousel__controls-top { display: flex; justify-content: flex-end; gap: 0.5rem; padding-bottom: 0.5rem; }
+.ticket-carousel__arrow { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #e4e4e7; background: #fff; cursor: pointer; font-size: 1.1rem; line-height: 1; }
+.ticket-carousel__arrow:disabled { opacity: 0.35; cursor: not-allowed; }
+.ticket-carousel__viewport { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding: 12px 4px 20px; scrollbar-width: thin; }
+.ticket-carousel__track { display: flex; gap: 1rem; width: max-content; }
+.ticket-card { scroll-snap-align: start; flex: 0 0 auto; width: min(300px, calc(100vw - 2.5rem)); max-width: 300px; background: #fff; border: 1px solid #e4e4e7; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.08); overflow: hidden; display: flex; flex-direction: column; }
+@media (min-width: 640px) { .ticket-card { width: 280px; max-width: 280px; } }
+.ticket-card__image { height: 120px; background-size: cover; background-position: center; }
+.ticket-card__body { padding: 1rem; flex: 1; display: flex; flex-direction: column; gap: 0.35rem; }
+.ticket-card__title { margin: 0; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.02em; }
+.ticket-card__list { margin: 0; padding-left: 1.1rem; font-size: 0.8125rem; color: #71717a; line-height: 1.45; flex: 1; }
+.ticket-card__price { font-weight: 600; font-size: 0.9375rem; }
+.ticket-card__btn { display: block; text-align: center; margin-top: 0.5rem; padding: 0.6rem; font-size: 0.875rem; font-weight: 600; color: #3257ff; border: 2px solid #3257ff; border-radius: 8px; text-decoration: none; background: #fff; }
+.ticket-carousel__dots { display: flex; justify-content: center; gap: 0.4rem; padding-top: 0.25rem; }
+.ticket-carousel__dot { width: 8px; height: 8px; border-radius: 50%; border: none; background: #d4d4d8; cursor: pointer; padding: 0; }
+.ticket-carousel__dot[aria-current="true"] { background: #3257ff; }
+</style>
+
 <div class="pd-description">
-<p>Enquanto o Spotify Camp Nou se transforma, o <strong>FC Barcelona Museum</strong> convida-te a viver o <strong>Barça Immersive Tour</strong>: um espaço temporário de cerca de 2&nbsp;400&nbsp;m² onde podes mergulhar na história do clube, nas conquistas e nas experiências interativas que tornam a visita inesquecível. Reserva o teu bilhete e descobre o espírito Barça.</p>
+<p>While <strong>Spotify Camp Nou</strong> is being transformed, the <strong>FC Barcelona Museum</strong> welcomes you to the <strong>Barça Immersive Tour</strong>: a temporary space of around <strong>2,400&nbsp;m²</strong> where you can dive into the club’s history, trophies, and interactive experiences. Book your tickets and feel the Barça spirit.</p>
 
-<h2 class="pd-section__title">Destaques</h2>
-
+<h2 class="pd-section__title">Highlights</h2>
 <ul class="pd-section__list">
-	<li class="pd-section__item"><span class="pd-section__icon">🏆</span> <span class="pd-section__text">Troféus e conquistas que marcaram a história do FC Barcelona</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">📜</span> <span class="pd-section__text">Uma viagem pela história dos nossos equipas e momentos inesquecíveis</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">⚽</span> <span class="pd-section__text">Zona Messi, sala macro 360° e experiências de realidade virtual exclusivas</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">🏗️</span> <span class="pd-section__text">Mirador das obras: acompanha em tempo real a evolução do novo Spotify Camp Nou</span></li>
+	<li class="pd-section__item"><span class="pd-section__icon">🏆</span> <span class="pd-section__text">Major trophies and titles that shaped FC Barcelona’s legacy</span></li>
+	<li class="pd-section__item"><span class="pd-section__icon">📜</span> <span class="pd-section__text">A journey through the history of our teams and unforgettable moments</span></li>
+	<li class="pd-section__item"><span class="pd-section__icon">⚽</span> <span class="pd-section__text">Messi Zone, 360° macro room, and exclusive immersive &amp; VR experiences</span></li>
+	<li class="pd-section__item"><span class="pd-section__icon">🏗️</span> <span class="pd-section__text">Construction viewpoint: follow the evolution of the new Spotify Camp Nou</span></li>
 </ul>
 
-<h2 class="pd-section__title">Tipos de bilhete</h2>
+<h2 class="pd-section__title">Ticket types</h2>
+<p style="color:#71717a;font-size:0.875rem;margin:0 0 0.75rem;">Swipe or use the arrows to compare options.</p>
 
+<div class="ticket-carousel" data-carousel>
+	<div class="ticket-carousel__controls-top">
+		<button type="button" class="ticket-carousel__arrow ticket-carousel__arrow--prev" aria-label="Previous tickets">‹</button>
+		<button type="button" class="ticket-carousel__arrow ticket-carousel__arrow--next" aria-label="Next tickets">›</button>
+	</div>
+	<div class="ticket-carousel__viewport" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Ticket type cards">
+		<div class="ticket-carousel__track">
+			<article class="ticket-card">
+				<div class="ticket-card__image" style="background-image:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&q=80');"></div>
+				<div class="ticket-card__body">
+					<h3 class="ticket-card__title">Basic Ticket</h3>
+					<ul class="ticket-card__list">
+						<li>Barça Museum access</li>
+						<li>Digital audio guide</li>
+						<li>Construction viewpoint</li>
+					</ul>
+					<div class="ticket-card__price">From €28</div>
+					<a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+				</div>
+			</article>
+			<article class="ticket-card">
+				<div class="ticket-card__image" style="background-image:url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600&q=80');"></div>
+				<div class="ticket-card__body">
+					<h3 class="ticket-card__title">Total Experience</h3>
+					<ul class="ticket-card__list">
+						<li>Everything in Basic Ticket</li>
+						<li>RoboKeeper — 3 shots</li>
+						<li>Digital memory of your visit</li>
+						<li>Barça Virtual Dream (VR)</li>
+					</ul>
+					<div class="ticket-card__price">From €49</div>
+					<a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+				</div>
+			</article>
+			<article class="ticket-card">
+				<div class="ticket-card__image" style="background-image:url('https://images.unsplash.com/photo-1522778119026-d647f0565c6f?w=600&q=80');"></div>
+				<div class="ticket-card__body">
+					<h3 class="ticket-card__title">Virtual Experience</h3>
+					<ul class="ticket-card__list">
+						<li>Museum + audio guide</li>
+						<li>Construction viewpoint</li>
+						<li>Barça Virtual Dream (VR)</li>
+					</ul>
+					<div class="ticket-card__price">From €42</div>
+					<a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+				</div>
+			</article>
+			<article class="ticket-card">
+				<div class="ticket-card__image" style="background-image:url('https://images.unsplash.com/photo-1459865264687-595dec57765b?w=600&q=80');"></div>
+				<div class="ticket-card__body">
+					<h3 class="ticket-card__title">Flexible Basic Ticket</h3>
+					<ul class="ticket-card__list">
+						<li>Ideal as a gift</li>
+						<li>Add extras at checkout</li>
+						<li>Valid until the date shown at purchase</li>
+					</ul>
+					<div class="ticket-card__price">From €36</div>
+					<a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+				</div>
+			</article>
+		</div>
+	</div>
+	<div class="ticket-carousel__dots" role="tablist" aria-label="Slide"></div>
+</div>
+
+<script>
+(function(){var r=document.querySelector(".pd-description [data-carousel]");if(!r)return;var v=r.querySelector(".ticket-carousel__viewport"),t=r.querySelector(".ticket-carousel__track"),c=[].slice.call(r.querySelectorAll(".ticket-card")),p=r.querySelector(".ticket-carousel__arrow--prev"),n=r.querySelector(".ticket-carousel__arrow--next"),d=r.querySelector(".ticket-carousel__dots");if(!v||!c.length)return;var g=16;function w(){return c[0]?c[0].getBoundingClientRect().width+g:v.clientWidth}function m(){return Math.max(0,v.scrollWidth-v.clientWidth-1)}function i(){var s=w();return s<=0?0:Math.min(c.length-1,Math.round(v.scrollLeft/s))}function u(a){v.scrollBy({left:a*w(),behavior:"smooth"})}function f(){var x=m();p.disabled=v.scrollLeft<=2;n.disabled=v.scrollLeft>=x-2}[].forEach.call(c,function(_,j){var b=document.createElement("button");b.type="button";b.className="ticket-carousel__dot";b.setAttribute("aria-label","Go to ticket "+(j+1));b.addEventListener("click",function(){v.scrollTo({left:c[j].offsetLeft-t.offsetLeft,behavior:"smooth"})});d.appendChild(b)});p.addEventListener("click",function(){u(-1)});n.addEventListener("click",function(){u(1)});var h;v.addEventListener("scroll",function(){clearTimeout(h);h=setTimeout(function(){f();var x=i();[].forEach.call(d.querySelectorAll(".ticket-carousel__dot"),function(b,k){b.setAttribute("aria-current",k===x?"true":"false")})},40)});window.addEventListener("resize",f);f();[].forEach.call(d.querySelectorAll(".ticket-carousel__dot"),function(b,k){b.setAttribute("aria-current",k===0?"true":"false")});})();
+</script>
+
+<h2 class="pd-section__title">General information</h2>
 <ul class="pd-section__list">
-	<li class="pd-section__item"><span class="pd-section__icon">🎫</span> <span class="pd-section__text"><strong>Basic Ticket</strong> — Museu + audioguia digital + mirador da construção</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">⭐</span> <span class="pd-section__text"><strong>Total Experience</strong> — Inclui Basic + RoboKeeper (3 remates), memória digital da visita e Barça Virtual Dream</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">🥽</span> <span class="pd-section__text"><strong>Virtual Experience</strong> — Museu + audioguia + mirador + Barça Virtual Dream</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">🎁</span> <span class="pd-section__text"><strong>Flexible Basic Ticket</strong> — Ideal para oferecer; flexibilidade para escolher extras no checkout; válido até à data indicada na compra</span></li>
+	<li class="pd-section__item"><span class="pd-section__icon">📅</span> <span class="pd-section__text"><strong>Schedules:</strong> check availability and time slots in the ticket selector</span></li>
+	<li class="pd-section__item"><span class="pd-section__icon">📍</span> <span class="pd-section__text"><strong>Venue:</strong> Barça Immersive Tour / FC Barcelona Museum — Spotify Camp Nou area (see practical info on the official site)</span></li>
+	<li class="pd-section__item"><span class="pd-section__icon">👤</span> <span class="pd-section__text"><strong>Who it’s for:</strong> suitable for all ages; children’s rules may vary by activity and ticket type</span></li>
+	<li class="pd-section__item"><span class="pd-section__icon">♿</span> <span class="pd-section__text"><strong>Accessibility:</strong> access and support details on FC Barcelona’s accessibility section</span></li>
+	<li class="pd-section__item"><span class="pd-section__icon">❓</span> <span class="pd-section__text">FAQs and practical information on the <a href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca?int=WB_25-26_K366-47&amp;btm_source=WebBarca&amp;btm_medium=Widget&amp;btm_campaign=Landingmuseu_EN_TKT_CNE_WW" rel="noopener noreferrer">official FC Barcelona website</a></span></li>
 </ul>
 
-<h2 class="pd-section__title">Informações gerais</h2>
-
-<ul class="pd-section__list">
-	<li class="pd-section__item"><span class="pd-section__icon">📅</span> <span class="pd-section__text"><strong>Horários:</strong> consulta disponibilidade e sessões no seletor de bilhetes</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">📍</span> <span class="pd-section__text"><strong>Local:</strong> Barça Immersive Tour / FC Barcelona Museum — zona Spotify Camp Nou, Barcelona (detalhes práticos no site oficial)</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">👤</span> <span class="pd-section__text"><strong>Público:</strong> experiência adequada a todas as idades; regras específicas para crianças e acompanhamento podem aplicar-se conforme o tipo de bilhete</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">♿</span> <span class="pd-section__text"><strong>Acessibilidade:</strong> informação sobre acessos e apoio disponível na secção de acessibilidade do FC Barcelona</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">❓</span> <span class="pd-section__text">Perguntas frequentes e informação prática do Barça Immersive Tour <a href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca?int=WB_25-26_K366-47&amp;btm_source=WebBarca&amp;btm_medium=Widget&amp;btm_campaign=Landingmuseu_EN_TKT_CNE_WW" rel="noopener noreferrer">no site oficial do FC Barcelona</a></span></li>
-</ul>
-
-<h2 class="pd-section__title">Descrição</h2>
-
-<p>O <strong>Barça Museum</strong> é o ponto de encontro para quem quer reviver os grandes momentos do clube: troféus da Champions, La Liga e muito mais, uma narrativa envolvente sobre a história do FC Barcelona, e espaços dedicados como a <strong>Zona Messi</strong> com prémios individuais de excelência. A <strong>sala macro 360°</strong> e o <strong>Barça Virtual Dream</strong> levam a emoção do estádio e do clube a outro nível — e o desafio <strong>RoboKeeper</strong> convida-te a marcar golo ao guarda-redes robótico mais rápido do mundo (incluído nas experiências que o preço do teu bilhete contemplar).</p>
-
-<p>Completa a tua visita com o <strong>mirador das obras</strong> para acompanhar a transformação do Spotify Camp Nou. Escolhe entre <strong>Basic Ticket</strong>, <strong>Total Experience</strong>, <strong>Virtual Experience</strong> ou <strong>Flexible Basic Ticket</strong> e garante já o teu lugar nesta experiência única.</p>
+<h2 class="pd-section__title">About the experience</h2>
+<p>The <strong>Barça Museum</strong> is where fans relive the club’s greatest moments: Champions League and league titles, the story of FC Barcelona across decades, and spaces such as the <strong>Messi Zone</strong> with individual awards. The <strong>360° macro room</strong> and <strong>Barça Virtual Dream</strong> take the emotion further — and <strong>RoboKeeper</strong> lets you shoot against the world’s fastest robotic keeper (included where your ticket package includes it).</p>
+<p>Finish with the <strong>construction viewpoint</strong> to follow the transformation of Spotify Camp Nou. Choose <strong>Basic Ticket</strong>, <strong>Total Experience</strong>, <strong>Virtual Experience</strong>, or <strong>Flexible Basic Ticket</strong> and secure your visit.</p>
 </div>

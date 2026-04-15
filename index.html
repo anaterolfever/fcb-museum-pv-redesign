@@ -1,56 +1,162 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>FC Barcelona Museum — Barça Immersive Tour</title>
+  <title>Barça Museum — FC Barcelona Immersive Tour</title>
   <style>
     :root {
-      --barca-blue: #004d98;
-      --barca-red: #a50044;
-      --bg: #0c1420;
-      --card: #121c2c;
-      --text: #e8eef5;
-      --muted: #9fb0c8;
+      --fev-blue: #3257ff;
+      --fev-blue-hover: #2547e6;
+      --bg: #ffffff;
+      --bg-muted: #f4f4f5;
+      --border: #e4e4e7;
+      --text: #18181b;
+      --text-muted: #71717a;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 1px 3px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
-      min-height: 100vh;
-      font-family: system-ui, "Segoe UI", Roboto, sans-serif;
-      background: linear-gradient(165deg, var(--bg) 0%, #0a1628 50%, #0d1f35 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.55;
+      line-height: 1.5;
+      padding-bottom: 5rem;
     }
-    .wrap {
-      max-width: 42rem;
-      margin: 0 auto;
-      padding: 2rem 1.25rem 3rem;
+    @media (min-width: 1024px) {
+      body { padding-bottom: 0; }
     }
-    header {
-      border-bottom: 3px solid var(--barca-red);
-      padding-bottom: 1rem;
-      margin-bottom: 1.5rem;
+
+    /* —— Mock Fever header —— */
+    .fev-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+      position: sticky;
+      top: 0;
+      z-index: 50;
     }
-    header h1 {
+    .fev-header__logo { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.03em; color: var(--fev-blue); }
+    .fev-header__meta { font-size: 0.8125rem; color: var(--text-muted); }
+
+    /* —— Hero gallery (Barça-inspired) —— */
+    .fev-hero {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 4px;
+      min-height: 200px;
+      max-height: 360px;
+      background: #0a1628;
+    }
+    @media (max-width: 640px) {
+      .fev-hero { grid-template-columns: 1fr; min-height: 220px; max-height: none; }
+      .fev-hero__grid { display: none; }
+    }
+    .fev-hero__main {
+      background: linear-gradient(135deg, #004d98 0%, #a50044 55%, #0a1628 100%);
+      display: flex;
+      align-items: flex-end;
+      padding: 1.25rem;
+      position: relative;
+    }
+    .fev-hero__main h2 {
       margin: 0;
-      font-size: 1.35rem;
+      color: #fff;
+      font-size: clamp(1.25rem, 4vw, 1.75rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.35);
+    }
+    .fev-hero__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 4px;
+    }
+    .fev-hero__cell {
+      background: linear-gradient(160deg, #1e3a5f 0%, #0d2847 100%);
+      min-height: 0;
+    }
+    .fev-hero__cell:nth-child(2) { background: linear-gradient(160deg, #3d1a2e 0%, #1a0f18 100%); }
+    .fev-hero__cell:nth-child(3) { background: linear-gradient(160deg, #1a3d2e 0%, #0f1f18 100%); }
+    .fev-hero__cell:nth-child(4) { background: linear-gradient(160deg, #2e2a1a 0%, #18160f 100%); }
+
+    /* —— Layout: main + sticky sidebar —— */
+    .fev-layout {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    @media (min-width: 1024px) {
+      .fev-layout {
+        grid-template-columns: 1fr min(340px, 32%);
+        align-items: start;
+        gap: 2rem;
+        padding: 1.5rem 1.5rem 4rem;
+      }
+    }
+
+    .fev-title-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .fev-title-row h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
       font-weight: 700;
       letter-spacing: -0.02em;
+      line-height: 1.2;
     }
-    header p {
-      margin: 0.35rem 0 0;
+    .fev-title-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+    .fev-icon-btn {
+      width: 40px; height: 40px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      background: var(--bg);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+    }
+
+    .fev-quickgrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem 1rem;
+      margin: 1.25rem 0 1.5rem;
       font-size: 0.875rem;
-      color: var(--muted);
+      color: var(--text-muted);
     }
-    .pd-description a { color: #7eb8ff; }
-    .pd-description a:hover { text-decoration: underline; }
+    @media (max-width: 480px) {
+      .fev-quickgrid { grid-template-columns: 1fr; }
+    }
+    .fev-quickgrid__item { display: flex; gap: 0.5rem; align-items: flex-start; }
+    .fev-quickgrid__item strong { color: var(--text); display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.15rem; }
+
+    .pd-description p {
+      margin: 0 0 1rem;
+      color: var(--text);
+      font-size: 0.9375rem;
+    }
+    .pd-description p:last-child { margin-bottom: 0; }
+
     .pd-section__title {
-      font-size: 1.05rem;
-      margin: 1.5rem 0 0.65rem;
-      color: #fff;
-      border-left: 4px solid var(--barca-blue);
-      padding-left: 0.65rem;
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin: 1.75rem 0 0.75rem;
+      color: var(--text);
     }
     .pd-section__list {
       list-style: none;
@@ -61,58 +167,549 @@
       display: flex;
       gap: 0.5rem;
       align-items: flex-start;
-      padding: 0.45rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
+      padding: 0.4rem 0;
+      font-size: 0.9375rem;
     }
-    .pd-section__icon { flex-shrink: 0; }
-    .pd-section__text, .info-section__text { color: var(--text); }
-    .pd-description p { margin: 0 0 1rem; color: var(--muted); }
-    .pd-description p strong { color: var(--text); }
+    .pd-section__text a { color: var(--fev-blue); text-decoration: none; }
+    .pd-section__text a:hover { text-decoration: underline; }
+
+    /* —— Feature pills (like Fever icon grid) —— */
+    .fev-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.75rem;
+      margin: 1.25rem 0 0;
+    }
+    .fev-feature {
+      background: var(--bg-muted);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem;
+      font-size: 0.8125rem;
+      text-align: center;
+    }
+    .fev-feature__icon { font-size: 1.35rem; display: block; margin-bottom: 0.35rem; }
+    .fev-feature__label { font-weight: 600; color: var(--text); line-height: 1.3; }
+
+    /* —— Ticket carousel (Fever-style: full cards, no clipping) —— */
+    .ticket-carousel-section { margin: 2rem 0 1.5rem; }
+    .ticket-carousel-section > .pd-section__title { margin-top: 0; }
+
+    .ticket-carousel {
+      position: relative;
+      margin: 0 -1rem;
+      padding: 0 0 0.5rem;
+    }
+    @media (min-width: 1024px) {
+      .ticket-carousel { margin: 0; }
+    }
+
+    .ticket-carousel__controls-top {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      padding: 0 1rem 0.5rem;
+    }
+    @media (min-width: 1024px) {
+      .ticket-carousel__controls-top { padding: 0 0 0.5rem; }
+    }
+
+    .ticket-carousel__arrow {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      line-height: 1;
+      color: var(--text);
+      transition: background 0.15s, border-color 0.15s;
+      flex-shrink: 0;
+    }
+    .ticket-carousel__arrow:hover:not(:disabled) {
+      background: var(--bg-muted);
+      border-color: #d4d4d8;
+    }
+    .ticket-carousel__arrow:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .ticket-carousel__viewport {
+      overflow-x: auto;
+      overflow-y: visible;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: #cbd5e1 transparent;
+      /* Side padding so first/last cards + shadows are not clipped */
+      padding: 12px 1rem 20px;
+      margin: 0;
+    }
+    .ticket-carousel__viewport::-webkit-scrollbar { height: 6px; }
+    .ticket-carousel__viewport::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    .ticket-carousel__track {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 1rem;
+      width: max-content;
+      min-height: 1px;
+    }
+
+    .ticket-card {
+      scroll-snap-align: start;
+      flex: 0 0 auto;
+      width: min(300px, calc(100vw - 3rem));
+      max-width: 300px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    @media (min-width: 640px) {
+      .ticket-card {
+        width: 280px;
+        max-width: 280px;
+      }
+    }
+
+    .ticket-card__image {
+      height: 120px;
+      background-size: cover;
+      background-position: center;
+      flex-shrink: 0;
+    }
+    .ticket-card__body {
+      padding: 1rem 1rem 1.125rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 0.5rem;
+    }
+    .ticket-card__title {
+      margin: 0;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      line-height: 1.25;
+      color: var(--text);
+    }
+    .ticket-card__list {
+      margin: 0;
+      padding-left: 1.1rem;
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      flex: 1;
+    }
+    .ticket-card__list li { margin-bottom: 0.25rem; }
+    .ticket-card__price {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 0.25rem;
+    }
+    .ticket-card__btn {
+      display: block;
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.65rem 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-align: center;
+      color: var(--fev-blue);
+      background: var(--bg);
+      border: 2px solid var(--fev-blue);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+    }
+    .ticket-card__btn:hover {
+      background: rgba(50, 87, 255, 0.06);
+    }
+
+    .ticket-carousel__dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.25rem 1rem 0;
+    }
+    .ticket-carousel__dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      padding: 0;
+      background: #d4d4d8;
+      cursor: pointer;
+      transition: transform 0.15s, background 0.15s;
+    }
+    .ticket-carousel__dot[aria-current="true"] {
+      background: var(--fev-blue);
+      transform: scale(1.15);
+    }
+
+    /* —— Sticky sidebar (desktop) —— */
+    .fev-sidebar {
+      display: none;
+    }
+    @media (min-width: 1024px) {
+      .fev-sidebar {
+        display: block;
+        position: sticky;
+        top: 72px;
+      }
+    }
+    .fev-sidebar__card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.25rem;
+      background: var(--bg);
+    }
+    .fev-sidebar__label { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+    .fev-sidebar__row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+    }
+    .fev-sidebar__row:last-of-type { border-bottom: none; }
+    .fev-sidebar__price { font-weight: 700; }
+    .fev-sidebar__cta {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.85rem 1rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--fev-blue);
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+    .fev-sidebar__cta:hover { background: var(--fev-blue-hover); }
+
+    /* —— Info + map blocks —— */
+    .fev-info-block {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .fev-map-placeholder {
+      margin-top: 0.75rem;
+      height: 180px;
+      background: linear-gradient(180deg, #e0f2fe 0%, #cbd5e1 100%);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      border: 1px solid var(--border);
+    }
+
+    /* —— Mobile sticky CTA —— */
+    .fev-sticky-cta {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.75rem 1rem;
+      padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+      z-index: 40;
+    }
+    .fev-sticky-cta button {
+      flex: 1;
+      padding: 0.85rem 1rem;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      background: var(--fev-blue);
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+    }
+    @media (min-width: 1024px) {
+      .fev-sticky-cta { display: none; }
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <h1>Barça Museum — descrição do produto</h1>
-      <p>Preview estático para integração (Fever / landing)</p>
-    </header>
-    <main class="pd-description">
-<p>Enquanto o Spotify Camp Nou se transforma, o <strong>FC Barcelona Museum</strong> convida-te a viver o <strong>Barça Immersive Tour</strong>: um espaço temporário de cerca de 2&nbsp;400&nbsp;m² onde podes mergulhar na história do clube, nas conquistas e nas experiências interativas que tornam a visita inesquecível. Reserva o teu bilhete e descobre o espírito Barça.</p>
+  <header class="fev-header" aria-label="Preview header">
+    <span class="fev-header__logo">fever</span>
+    <span class="fev-header__meta">Barcelona · Preview</span>
+  </header>
 
-<h2 class="pd-section__title">Destaques</h2>
+  <section class="fev-hero" aria-label="Gallery">
+    <div class="fev-hero__main">
+      <h2>Barça Museum · Immersive Tour</h2>
+    </div>
+    <div class="fev-hero__grid" aria-hidden="true">
+      <div class="fev-hero__cell"></div>
+      <div class="fev-hero__cell"></div>
+      <div class="fev-hero__cell"></div>
+      <div class="fev-hero__cell"></div>
+    </div>
+  </section>
 
-<ul class="pd-section__list">
-	<li class="pd-section__item"><span class="pd-section__icon">🏆</span> <span class="pd-section__text">Troféus e conquistas que marcaram a história do FC Barcelona</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">📜</span> <span class="pd-section__text">Uma viagem pela história dos nossos equipas e momentos inesquecíveis</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">⚽</span> <span class="pd-section__text">Zona Messi, sala macro 360° e experiências de realidade virtual exclusivas</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">🏗️</span> <span class="pd-section__text">Mirador das obras: acompanha em tempo real a evolução do novo Spotify Camp Nou</span></li>
-</ul>
+  <div class="fev-layout">
+    <main>
+      <div class="fev-title-row">
+        <h1>FC Barcelona Museum — Barça Immersive Tour</h1>
+        <div class="fev-title-actions">
+          <button type="button" class="fev-icon-btn" aria-label="Share">↗</button>
+          <button type="button" class="fev-icon-btn" aria-label="Save">♡</button>
+        </div>
+      </div>
 
-<h2 class="pd-section__title">Tipos de bilhete</h2>
+      <div class="fev-quickgrid">
+        <div class="fev-quickgrid__item">
+          <span aria-hidden="true">📍</span>
+          <div><strong>Location</strong> Spotify Camp Nou area — Barça Immersive Tour, Barcelona</div>
+        </div>
+        <div class="fev-quickgrid__item">
+          <span aria-hidden="true">📅</span>
+          <div><strong>Dates &amp; times</strong> Choose your visit in the ticket selector</div>
+        </div>
+        <div class="fev-quickgrid__item">
+          <span aria-hidden="true">⏱</span>
+          <div><strong>Duration</strong> Allow around 90 minutes (varies by ticket)</div>
+        </div>
+        <div class="fev-quickgrid__item">
+          <span aria-hidden="true">👤</span>
+          <div><strong>Ages</strong> All ages welcome. Conditions may apply for certain activities</div>
+        </div>
+        <div class="fev-quickgrid__item">
+          <span aria-hidden="true">♿</span>
+          <div><strong>Accessibility</strong> Information available on the official FC Barcelona site</div>
+        </div>
+      </div>
 
-<ul class="pd-section__list">
-	<li class="pd-section__item"><span class="pd-section__icon">🎫</span> <span class="pd-section__text"><strong>Basic Ticket</strong> — Museu + audioguia digital + mirador da construção</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">⭐</span> <span class="pd-section__text"><strong>Total Experience</strong> — Inclui Basic + RoboKeeper (3 remates), memória digital da visita e Barça Virtual Dream</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">🥽</span> <span class="pd-section__text"><strong>Virtual Experience</strong> — Museu + audioguia + mirador + Barça Virtual Dream</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">🎁</span> <span class="pd-section__text"><strong>Flexible Basic Ticket</strong> — Ideal para oferecer; flexibilidade para escolher extras no checkout; válido até à data indicada na compra</span></li>
-</ul>
+      <div class="pd-description">
+        <p>While <strong>Spotify Camp Nou</strong> is being transformed, the <strong>FC Barcelona Museum</strong> welcomes you to the <strong>Barça Immersive Tour</strong>: a temporary space of around <strong>2,400&nbsp;m²</strong> where you can dive into the club’s history, trophies, and interactive experiences. Book your tickets and feel the Barça spirit.</p>
 
-<h2 class="pd-section__title">Informações gerais</h2>
+        <h2 class="pd-section__title">Highlights</h2>
+        <ul class="pd-section__list">
+          <li class="pd-section__item"><span class="pd-section__icon">🏆</span> <span class="pd-section__text">Major trophies and titles that shaped FC Barcelona’s legacy</span></li>
+          <li class="pd-section__item"><span class="pd-section__icon">📜</span> <span class="pd-section__text">A journey through the history of our teams and unforgettable moments</span></li>
+          <li class="pd-section__item"><span class="pd-section__icon">⚽</span> <span class="pd-section__text">Messi Zone, 360° macro room, and exclusive immersive &amp; VR experiences</span></li>
+          <li class="pd-section__item"><span class="pd-section__icon">🏗️</span> <span class="pd-section__text">Construction viewpoint: follow the evolution of the new Spotify Camp Nou</span></li>
+        </ul>
 
-<ul class="pd-section__list">
-	<li class="pd-section__item"><span class="pd-section__icon">📅</span> <span class="pd-section__text"><strong>Horários:</strong> consulta disponibilidade e sessões no seletor de bilhetes</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">📍</span> <span class="pd-section__text"><strong>Local:</strong> Barça Immersive Tour / FC Barcelona Museum — zona Spotify Camp Nou, Barcelona (detalhes práticos no site oficial)</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">👤</span> <span class="pd-section__text"><strong>Público:</strong> experiência adequada a todas as idades; regras específicas para crianças e acompanhamento podem aplicar-se conforme o tipo de bilhete</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">♿</span> <span class="pd-section__text"><strong>Acessibilidade:</strong> informação sobre acessos e apoio disponível na secção de acessibilidade do FC Barcelona</span></li>
-	<li class="pd-section__item"><span class="pd-section__icon">❓</span> <span class="pd-section__text">Perguntas frequentes e informação prática do Barça Immersive Tour <a href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca?int=WB_25-26_K366-47&amp;btm_source=WebBarca&amp;btm_medium=Widget&amp;btm_campaign=Landingmuseu_EN_TKT_CNE_WW" rel="noopener noreferrer">no site oficial do FC Barcelona</a></span></li>
-</ul>
+        <div class="fev-features" aria-label="What’s included">
+          <div class="fev-feature"><span class="fev-feature__icon">🏆</span><span class="fev-feature__label">Museum &amp; trophies</span></div>
+          <div class="fev-feature"><span class="fev-feature__icon">🎧</span><span class="fev-feature__label">Digital audio guide</span></div>
+          <div class="fev-feature"><span class="fev-feature__icon">🥅</span><span class="fev-feature__label">RoboKeeper challenge</span></div>
+          <div class="fev-feature"><span class="fev-feature__icon">🥽</span><span class="fev-feature__label">Barça Virtual Dream</span></div>
+          <div class="fev-feature"><span class="fev-feature__icon">📷</span><span class="fev-feature__label">Digital visit memory</span></div>
+        </div>
 
-<h2 class="pd-section__title">Descrição</h2>
+        <section class="ticket-carousel-section" aria-labelledby="ticket-types-heading">
+          <h2 class="pd-section__title" id="ticket-types-heading">Ticket types</h2>
+          <p style="font-size:0.9375rem;color:var(--text-muted);margin:0 0 0.75rem;">Swipe or use the arrows to compare options — same tiers as on the official Barça ticketing page.</p>
 
-<p>O <strong>Barça Museum</strong> é o ponto de encontro para quem quer reviver os grandes momentos do clube: troféus da Champions, La Liga e muito mais, uma narrativa envolvente sobre a história do FC Barcelona, e espaços dedicados como a <strong>Zona Messi</strong> com prémios individuais de excelência. A <strong>sala macro 360°</strong> e o <strong>Barça Virtual Dream</strong> levam a emoção do estádio e do clube a outro nível — e o desafio <strong>RoboKeeper</strong> convida-te a marcar golo ao guarda-redes robótico mais rápido do mundo (incluído nas experiências que o preço do teu bilhete contemplar).</p>
+          <div class="ticket-carousel" data-carousel>
+            <div class="ticket-carousel__controls-top">
+              <button type="button" class="ticket-carousel__arrow ticket-carousel__arrow--prev" aria-label="Previous tickets">‹</button>
+              <button type="button" class="ticket-carousel__arrow ticket-carousel__arrow--next" aria-label="Next tickets">›</button>
+            </div>
+            <div class="ticket-carousel__viewport" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Ticket type cards">
+              <div class="ticket-carousel__track">
+                <article class="ticket-card">
+                  <div class="ticket-card__image" style="background-image:url('https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=600&q=80');"></div>
+                  <div class="ticket-card__body">
+                    <h3 class="ticket-card__title">Basic Ticket</h3>
+                    <ul class="ticket-card__list">
+                      <li>Barça Museum access</li>
+                      <li>Digital audio guide</li>
+                      <li>Construction viewpoint</li>
+                    </ul>
+                    <div class="ticket-card__price">From €28</div>
+                    <a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+                  </div>
+                </article>
+                <article class="ticket-card">
+                  <div class="ticket-card__image" style="background-image:url('https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=600&q=80');"></div>
+                  <div class="ticket-card__body">
+                    <h3 class="ticket-card__title">Total Experience</h3>
+                    <ul class="ticket-card__list">
+                      <li>Everything in Basic Ticket</li>
+                      <li>RoboKeeper — 3 shots</li>
+                      <li>Digital memory of your visit</li>
+                      <li>Barça Virtual Dream (VR)</li>
+                    </ul>
+                    <div class="ticket-card__price">From €49</div>
+                    <a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+                  </div>
+                </article>
+                <article class="ticket-card">
+                  <div class="ticket-card__image" style="background-image:url('https://images.unsplash.com/photo-1522778119026-d647f0565c6f?w=600&q=80');"></div>
+                  <div class="ticket-card__body">
+                    <h3 class="ticket-card__title">Virtual Experience</h3>
+                    <ul class="ticket-card__list">
+                      <li>Museum + audio guide</li>
+                      <li>Construction viewpoint</li>
+                      <li>Barça Virtual Dream (VR)</li>
+                    </ul>
+                    <div class="ticket-card__price">From €42</div>
+                    <a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+                  </div>
+                </article>
+                <article class="ticket-card">
+                  <div class="ticket-card__image" style="background-image:url('https://images.unsplash.com/photo-1459865264687-595dec57765b?w=600&q=80');"></div>
+                  <div class="ticket-card__body">
+                    <h3 class="ticket-card__title">Flexible Basic Ticket</h3>
+                    <ul class="ticket-card__list">
+                      <li>Ideal as a gift</li>
+                      <li>Add extras at checkout</li>
+                      <li>Valid until the date shown at purchase</li>
+                    </ul>
+                    <div class="ticket-card__price">From €36</div>
+                    <a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+                  </div>
+                </article>
+              </div>
+            </div>
+            <div class="ticket-carousel__dots" role="tablist" aria-label="Slide"></div>
+          </div>
+        </section>
 
-<p>Completa a tua visita com o <strong>mirador das obras</strong> para acompanhar a transformação do Spotify Camp Nou. Escolhe entre <strong>Basic Ticket</strong>, <strong>Total Experience</strong>, <strong>Virtual Experience</strong> ou <strong>Flexible Basic Ticket</strong> e garante já o teu lugar nesta experiência única.</p>
+        <h2 class="pd-section__title">General information</h2>
+        <ul class="pd-section__list">
+          <li class="pd-section__item"><span class="pd-section__icon">📅</span> <span class="pd-section__text"><strong>Schedules:</strong> check availability and time slots in the ticket selector</span></li>
+          <li class="pd-section__item"><span class="pd-section__icon">📍</span> <span class="pd-section__text"><strong>Venue:</strong> Barça Immersive Tour / FC Barcelona Museum — Spotify Camp Nou area (see practical info on the official site)</span></li>
+          <li class="pd-section__item"><span class="pd-section__icon">👤</span> <span class="pd-section__text"><strong>Who it’s for:</strong> suitable for all ages; children’s rules may vary by activity and ticket type</span></li>
+          <li class="pd-section__item"><span class="pd-section__icon">♿</span> <span class="pd-section__text"><strong>Accessibility:</strong> access and support details on FC Barcelona’s accessibility section</span></li>
+          <li class="pd-section__item"><span class="pd-section__icon">❓</span> <span class="pd-section__text">FAQs and practical information for the Barça Immersive Tour on the <a href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca?int=WB_25-26_K366-47&amp;btm_source=WebBarca&amp;btm_medium=Widget&amp;btm_campaign=Landingmuseu_EN_TKT_CNE_WW" rel="noopener noreferrer">official FC Barcelona website</a></span></li>
+        </ul>
+
+        <h2 class="pd-section__title">About the experience</h2>
+        <p>The <strong>Barça Museum</strong> is where fans relive the club’s greatest moments: Champions League and league titles, the story of FC Barcelona across decades, and spaces such as the <strong>Messi Zone</strong> with individual awards. The <strong>360° macro room</strong> and <strong>Barça Virtual Dream</strong> take the emotion further — and <strong>RoboKeeper</strong> lets you shoot against the world’s fastest robotic keeper (included where your ticket package includes it).</p>
+        <p>Finish with the <strong>construction viewpoint</strong> to follow the transformation of Spotify Camp Nou. Choose <strong>Basic Ticket</strong>, <strong>Total Experience</strong>, <strong>Virtual Experience</strong>, or <strong>Flexible Basic Ticket</strong> and secure your visit.</p>
+      </div>
+
+      <div class="fev-info-block">
+        <h2 class="pd-section__title">Getting there</h2>
+        <p style="margin:0 0 0.5rem;font-size:0.9375rem;color:var(--text-muted);">Spotify Camp Nou area — follow directions on your ticket and on the official site.</p>
+        <div class="fev-map-placeholder" role="img" aria-label="Map placeholder">Map · embed in production</div>
+      </div>
     </main>
+
+    <aside class="fev-sidebar" aria-label="Ticket box">
+      <div class="fev-sidebar__card">
+        <div class="fev-sidebar__label">From price</div>
+        <div class="fev-sidebar__row"><span>Basic Ticket</span><span class="fev-sidebar__price">€28</span></div>
+        <div class="fev-sidebar__row"><span>Total Experience</span><span class="fev-sidebar__price">€49</span></div>
+        <button type="button" class="fev-sidebar__cta">Tickets from €28</button>
+      </div>
+    </aside>
   </div>
+
+  <div class="fev-sticky-cta">
+    <button type="button">Tickets from €28</button>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.querySelector("[data-carousel]");
+      if (!root) return;
+      var viewport = root.querySelector(".ticket-carousel__viewport");
+      var track = root.querySelector(".ticket-carousel__track");
+      var cards = Array.prototype.slice.call(root.querySelectorAll(".ticket-card"));
+      var prevBtn = root.querySelector(".ticket-carousel__arrow--prev");
+      var nextBtn = root.querySelector(".ticket-carousel__arrow--next");
+      var dotsWrap = root.querySelector(".ticket-carousel__dots");
+      if (!viewport || !cards.length) return;
+
+      var gap = 16;
+
+      function cardStepWidth() {
+        if (!cards[0]) return viewport.clientWidth;
+        var r = cards[0].getBoundingClientRect();
+        return r.width + gap;
+      }
+
+      function maxScroll() {
+        return Math.max(0, viewport.scrollWidth - viewport.clientWidth - 1);
+      }
+
+      function currentIndex() {
+        var step = cardStepWidth();
+        if (step <= 0) return 0;
+        return Math.min(cards.length - 1, Math.round(viewport.scrollLeft / step));
+      }
+
+      function scrollByDir(dir) {
+        viewport.scrollBy({ left: dir * cardStepWidth(), behavior: "smooth" });
+      }
+
+      function updateArrows() {
+        var max = maxScroll();
+        prevBtn.disabled = viewport.scrollLeft <= 2;
+        nextBtn.disabled = viewport.scrollLeft >= max - 2;
+      }
+
+      function updateDots() {
+        var idx = currentIndex();
+        Array.prototype.forEach.call(dotsWrap.querySelectorAll(".ticket-carousel__dot"), function (d, i) {
+          d.setAttribute("aria-current", i === idx ? "true" : "false");
+        });
+      }
+
+      cards.forEach(function (_, i) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = "ticket-carousel__dot";
+        b.setAttribute("aria-label", "Go to ticket " + (i + 1));
+        b.addEventListener("click", function () {
+          var left = cards[i].offsetLeft - track.offsetLeft;
+          viewport.scrollTo({ left: left, behavior: "smooth" });
+        });
+        dotsWrap.appendChild(b);
+      });
+
+      prevBtn.addEventListener("click", function () { scrollByDir(-1); });
+      nextBtn.addEventListener("click", function () { scrollByDir(1); });
+
+      var scrollT;
+      viewport.addEventListener("scroll", function () {
+        clearTimeout(scrollT);
+        scrollT = setTimeout(function () {
+          updateArrows();
+          updateDots();
+        }, 40);
+      });
+
+      window.addEventListener("resize", function () {
+        updateArrows();
+        updateDots();
+      });
+
+      updateArrows();
+      updateDots();
+    })();
+  </script>
 </body>
 </html>
