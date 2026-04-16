@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/plan.css">
   <link rel="stylesheet" href="css/desktop.css">
+  <script src="js/booking-plan.js"></script>
 
 </head>
 <body class="has-detail-layout">
@@ -149,15 +150,21 @@
           <h2>Select date and session</h2>
         </div>
         <div class="ticket-selector mobile-ticket-selector" id="ticketSelectorMobile">
-        <div class="ticket-selector__primary-tabs" role="tablist" aria-label="Ticket category">
-          <button type="button" class="ticket-selector__ptab is-active" role="tab" aria-selected="true" data-primary="dated">
-            <span class="ticket-selector__corner-check" aria-hidden="true"></span>
-            Dated visit
-          </button>
-          <button type="button" class="ticket-selector__ptab" role="tab" aria-selected="false" data-primary="open">
-            <span class="ticket-selector__corner-check" aria-hidden="true"></span>
-            Open-date ticket
-          </button>
+        <div class="booking-date-slot" data-booking-root>
+          <div class="session-picker" aria-label="Date and session">
+            <div class="session-picker__month booking-cal__head">
+              <button type="button" class="booking-cal__nav booking-cal__nav--prev" aria-label="Previous month">‹</button>
+              <div class="booking-cal__title" data-booking-month>June 2026</div>
+              <button type="button" class="booking-cal__nav booking-cal__nav--next" aria-label="Next month">›</button>
+            </div>
+            <div class="session-picker__strip-outer">
+              <div class="session-picker__strip" data-date-strip role="listbox" aria-label="Select day"></div>
+            </div>
+            <div class="time-slot-block">
+              <div class="time-slot-label">Time</div>
+              <div class="time-slot-row" data-time-slot-row role="listbox" aria-label="Select time"></div>
+            </div>
+          </div>
         </div>
         <div class="ticket-selector__tier-wrap">
           <button type="button" class="ticket-selector__tier-nav ticket-selector__tier-nav--prev" aria-label="Previous ticket types">‹</button>
@@ -170,9 +177,9 @@
           <button type="button" class="ticket-selector__tier-nav ticket-selector__tier-nav--next" aria-label="Next ticket types">›</button>
         </div>
         <ul class="ticket-selector__rows">
-          <li class="ticket-row is-selected" data-session="1">
+          <li class="ticket-row is-selected" data-session="visit">
             <div class="ticket-row__info">
-              <div class="ticket-row__line">Sat 21 Jun 2026 — 10:30 entry</div>
+              <div class="ticket-row__line" data-visit-summary>Sat 21 Jun 2026 — 10:30 entry</div>
               <button type="button" class="ticket-row__more">More info</button>
               <div class="ticket-row__price" data-line-price>€28.00</div>
             </div>
@@ -181,36 +188,6 @@
               <div class="ticket-row__stepper">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>1</span>
-                <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
-              </div>
-            </div>
-          </li>
-          <li class="ticket-row" data-session="2">
-            <div class="ticket-row__info">
-              <div class="ticket-row__line">Sat 21 Jun 2026 — 14:00 entry</div>
-              <button type="button" class="ticket-row__more">More info</button>
-              <div class="ticket-row__price" data-line-price>€0.00</div>
-            </div>
-            <div class="ticket-row__tear" aria-hidden="true"></div>
-            <div class="ticket-row__stub">
-              <div class="ticket-row__stepper">
-                <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
-                <span class="ticket-row__qty" data-qty>0</span>
-                <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
-              </div>
-            </div>
-          </li>
-          <li class="ticket-row" data-session="3">
-            <div class="ticket-row__info">
-              <div class="ticket-row__line">Sat 21 Jun 2026 — 16:30 entry</div>
-              <button type="button" class="ticket-row__more">More info</button>
-              <div class="ticket-row__price" data-line-price>€0.00</div>
-            </div>
-            <div class="ticket-row__tear" aria-hidden="true"></div>
-            <div class="ticket-row__stub">
-              <div class="ticket-row__stepper">
-                <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
-                <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
               </div>
             </div>
@@ -274,15 +251,21 @@
         <h2>Select date and session</h2>
       </div>
       <div class="ticket-selector" id="ticketSelectorDesktop">
-        <div class="ticket-selector__primary-tabs" role="tablist" aria-label="Ticket category">
-          <button type="button" class="ticket-selector__ptab is-active" role="tab" aria-selected="true" data-primary="dated">
-            <span class="ticket-selector__corner-check" aria-hidden="true"></span>
-            Dated visit
-          </button>
-          <button type="button" class="ticket-selector__ptab" role="tab" aria-selected="false" data-primary="open">
-            <span class="ticket-selector__corner-check" aria-hidden="true"></span>
-            Open-date ticket
-          </button>
+        <div class="booking-date-slot" data-booking-root>
+          <div class="session-picker" aria-label="Date and session">
+            <div class="session-picker__month booking-cal__head">
+              <button type="button" class="booking-cal__nav booking-cal__nav--prev" aria-label="Previous month">‹</button>
+              <div class="booking-cal__title" data-booking-month>June 2026</div>
+              <button type="button" class="booking-cal__nav booking-cal__nav--next" aria-label="Next month">›</button>
+            </div>
+            <div class="session-picker__strip-outer">
+              <div class="session-picker__strip" data-date-strip role="listbox" aria-label="Select day"></div>
+            </div>
+            <div class="time-slot-block">
+              <div class="time-slot-label">Time</div>
+              <div class="time-slot-row" data-time-slot-row role="listbox" aria-label="Select time"></div>
+            </div>
+          </div>
         </div>
 
         <div class="ticket-selector__tier-wrap">
@@ -297,9 +280,9 @@
         </div>
 
         <ul class="ticket-selector__rows">
-          <li class="ticket-row is-selected" data-session="1">
+          <li class="ticket-row is-selected" data-session="visit">
             <div class="ticket-row__info">
-              <div class="ticket-row__line">Sat 21 Jun 2026 — 10:30 entry</div>
+              <div class="ticket-row__line" data-visit-summary>Sat 21 Jun 2026 — 10:30 entry</div>
               <button type="button" class="ticket-row__more">More info</button>
               <div class="ticket-row__price" data-line-price>€28.00</div>
             </div>
@@ -308,36 +291,6 @@
               <div class="ticket-row__stepper">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>1</span>
-                <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
-              </div>
-            </div>
-          </li>
-          <li class="ticket-row" data-session="2">
-            <div class="ticket-row__info">
-              <div class="ticket-row__line">Sat 21 Jun 2026 — 14:00 entry</div>
-              <button type="button" class="ticket-row__more">More info</button>
-              <div class="ticket-row__price" data-line-price>€0.00</div>
-            </div>
-            <div class="ticket-row__tear" aria-hidden="true"></div>
-            <div class="ticket-row__stub">
-              <div class="ticket-row__stepper">
-                <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
-                <span class="ticket-row__qty" data-qty>0</span>
-                <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
-              </div>
-            </div>
-          </li>
-          <li class="ticket-row" data-session="3">
-            <div class="ticket-row__info">
-              <div class="ticket-row__line">Sat 21 Jun 2026 — 16:30 entry</div>
-              <button type="button" class="ticket-row__more">More info</button>
-              <div class="ticket-row__price" data-line-price>€0.00</div>
-            </div>
-            <div class="ticket-row__tear" aria-hidden="true"></div>
-            <div class="ticket-row__stub">
-              <div class="ticket-row__stepper">
-                <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
-                <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
               </div>
             </div>
@@ -493,8 +446,136 @@
       updateDots();
     })();
 
-    /* Booking widgets: mobile + desktop stay in sync (delegated) */
+    /* Booking: Fever-style date strip + time slots (see js/booking-plan.js), tiers, steppers */
     (function () {
+      var cfg = window.FCB_BOOKING_CONFIG || {};
+      var mp = cfg.minDate || [2026, 3, 15];
+      var BOOKING_MIN = new Date(mp[0], mp[1], mp[2]);
+
+      function stripTime(d) {
+        return new Date(d.getFullYear(), d.getMonth(), d.getDate());
+      }
+
+      function pad2(n) {
+        return (n < 10 ? "0" : "") + n;
+      }
+
+      var sd = cfg.selectedDate || [2026, 5, 21];
+      var vm = cfg.viewMonth || [sd[0], sd[1]];
+      var bookingState = {
+        viewY: vm[0],
+        viewM: vm[1],
+        selY: sd[0],
+        selM: sd[1],
+        selD: sd[2],
+        time: cfg.defaultTime || "10:30"
+      };
+
+      function dayEnabled(y, m, d) {
+        return stripTime(new Date(y, m, d)) >= stripTime(BOOKING_MIN);
+      }
+
+      function firstEnabledDayInMonth(y, m) {
+        var last = new Date(y, m + 1, 0).getDate();
+        for (var d = 1; d <= last; d++) {
+          if (dayEnabled(y, m, d)) return d;
+        }
+        var t = stripTime(BOOKING_MIN);
+        return t.getDate();
+      }
+
+      function monthNotBeforeMin(y, m) {
+        var t = stripTime(BOOKING_MIN);
+        if (y > t.getFullYear()) return true;
+        if (y < t.getFullYear()) return false;
+        return m >= t.getMonth();
+      }
+
+      function syncVisitSummaries() {
+        var d = new Date(bookingState.selY, bookingState.selM, bookingState.selD);
+        var datePart = d.toLocaleDateString("en-GB", {
+          weekday: "short",
+          day: "numeric",
+          month: "short",
+          year: "numeric"
+        });
+        var text = datePart + " — " + bookingState.time + " entry";
+        document.querySelectorAll("[data-visit-summary]").forEach(function (el) {
+          el.textContent = text;
+        });
+      }
+
+      function syncTimeSlots() {
+        document.querySelectorAll(".ticket-selector .time-slot").forEach(function (btn) {
+          var on = btn.getAttribute("data-time") === bookingState.time;
+          btn.classList.toggle("is-active", on);
+          btn.setAttribute("aria-selected", on ? "true" : "false");
+        });
+      }
+
+      function buildTimeSlotRows() {
+        var slots = cfg.timeSlots || ["10:30", "14:00", "16:30"];
+        var def = cfg.defaultTime || slots[0];
+        if (slots.indexOf(bookingState.time) === -1) bookingState.time = def;
+        document.querySelectorAll("[data-time-slot-row]").forEach(function (row) {
+          var html = [];
+          for (var i = 0; i < slots.length; i++) {
+            var t = slots[i];
+            var on = t === bookingState.time;
+            html.push(
+              '<button type="button" class="time-slot' +
+                (on ? " is-active" : "") +
+                '" role="option" aria-selected="' +
+                (on ? "true" : "false") +
+                '" data-time="' +
+                t +
+                '">' +
+                t +
+                "</button>"
+            );
+          }
+          row.innerHTML = html.join("");
+        });
+      }
+
+      function renderDateStrips() {
+        var y = bookingState.viewY;
+        var m = bookingState.viewM;
+        var lastDay = new Date(y, m + 1, 0).getDate();
+        document.querySelectorAll("[data-date-strip]").forEach(function (strip) {
+          var html = [];
+          for (var day = 1; day <= lastDay; day++) {
+            if (!dayEnabled(y, m, day)) continue;
+            var iso = y + "-" + pad2(m + 1) + "-" + pad2(day);
+            var isSel =
+              day === bookingState.selD && m === bookingState.selM && y === bookingState.selY;
+            var dt = new Date(y, m, day);
+            var dow = dt.toLocaleDateString("en-GB", { weekday: "short" });
+            html.push(
+              '<button type="button" class="date-strip__day' +
+                (isSel ? " is-selected" : "") +
+                '" data-iso="' +
+                iso +
+                '" role="option" aria-selected="' +
+                (isSel ? "true" : "false") +
+                '"><span class="date-strip__dow">' +
+                dow +
+                '</span><span class="date-strip__num">' +
+                day +
+                "</span></button>"
+            );
+          }
+          strip.innerHTML = html.join("");
+        });
+        document.querySelectorAll("[data-booking-month]").forEach(function (el) {
+          el.textContent = new Date(bookingState.viewY, bookingState.viewM, 1).toLocaleDateString("en-GB", {
+            month: "long",
+            year: "numeric"
+          });
+        });
+        syncVisitSummaries();
+      }
+
       function formatMoney(n) {
         var s = n.toFixed(2);
         var parts = s.split(".");
@@ -507,20 +588,11 @@
         return t ? parseFloat(t.getAttribute("data-unit") || "0", 10) : 0;
       }
 
-      function sessionIds() {
-        var seen = {};
-        document.querySelectorAll(".ticket-row").forEach(function (row) {
-          seen[row.getAttribute("data-session")] = true;
-        });
-        return Object.keys(seen);
-      }
-
-      function syncSession(sid) {
+      function syncVisitRows() {
         var unit = getActiveUnit();
-        var first = document.querySelector('.ticket-row[data-session="' + sid + '"]');
-        if (!first) return;
-        var qty = parseInt(first.querySelector("[data-qty]").textContent, 10) || 0;
-        document.querySelectorAll('.ticket-row[data-session="' + sid + '"]').forEach(function (row) {
+        var anchor = document.querySelector('.ticket-row[data-session="visit"] [data-qty]');
+        var qty = anchor ? parseInt(anchor.textContent, 10) || 0 : 0;
+        document.querySelectorAll('.ticket-row[data-session="visit"]').forEach(function (row) {
           var qtyEl = row.querySelector("[data-qty]");
           var priceEl = row.querySelector("[data-line-price]");
           var minus = row.querySelector(".ticket-row__step--minus");
@@ -535,17 +607,11 @@
       }
 
       function updateTotals() {
-        sessionIds().forEach(function (sid) {
-          syncSession(sid);
-        });
-        var total = 0;
+        syncVisitRows();
         var unit = getActiveUnit();
-        sessionIds().forEach(function (sid) {
-          var row = document.querySelector('.ticket-row[data-session="' + sid + '"]');
-          if (!row) return;
-          var q = parseInt(row.querySelector("[data-qty]").textContent, 10) || 0;
-          total += unit * q;
-        });
+        var row = document.querySelector('.ticket-row[data-session="visit"]');
+        var q = row ? parseInt(row.querySelector("[data-qty]").textContent, 10) || 0 : 0;
+        var total = unit * q;
         var label = formatMoney(total) + " — Get it";
         ["ticketSelectorCtaMobile", "ticketSelectorCtaDesktop", "ticketSelectorCtaSticky"].forEach(function (id) {
           var el = document.getElementById(id);
@@ -554,6 +620,57 @@
       }
 
       document.addEventListener("click", function (e) {
+        var navP = e.target.closest(".booking-cal__nav--prev");
+        var navN = e.target.closest(".booking-cal__nav--next");
+        if (navP || navN) {
+          if (!(navP || navN).closest(".ticket-selector")) return;
+          var nm = bookingState.viewM + (navN ? 1 : -1);
+          var vy = bookingState.viewY;
+          if (nm < 0) {
+            nm = 11;
+            vy--;
+          }
+          if (nm > 11) {
+            nm = 0;
+            vy++;
+          }
+          if (navP && !monthNotBeforeMin(vy, nm)) return;
+          bookingState.viewY = vy;
+          bookingState.viewM = nm;
+          bookingState.selY = vy;
+          bookingState.selM = nm;
+          bookingState.selD = firstEnabledDayInMonth(vy, nm);
+          renderDateStrips();
+          syncTimeSlots();
+          updateTotals();
+          return;
+        }
+
+        var dayBtn = e.target.closest(".date-strip__day");
+        if (dayBtn && dayBtn.closest(".ticket-selector")) {
+          var iso = dayBtn.getAttribute("data-iso");
+          if (!iso) return;
+          var p = iso.split("-");
+          bookingState.selY = parseInt(p[0], 10);
+          bookingState.selM = parseInt(p[1], 10) - 1;
+          bookingState.selD = parseInt(p[2], 10);
+          bookingState.viewY = bookingState.selY;
+          bookingState.viewM = bookingState.selM;
+          renderDateStrips();
+          syncTimeSlots();
+          updateTotals();
+          return;
+        }
+
+        var slot = e.target.closest(".time-slot");
+        if (slot && slot.closest(".ticket-selector")) {
+          bookingState.time = slot.getAttribute("data-time") || bookingState.time;
+          syncTimeSlots();
+          syncVisitSummaries();
+          updateTotals();
+          return;
+        }
+
         var tierBtn = e.target.closest(".ticket-selector__tier");
         if (tierBtn && tierBtn.closest(".ticket-selector")) {
           var tier = tierBtn.getAttribute("data-tier");
@@ -563,16 +680,7 @@
           updateTotals();
           return;
         }
-        var ptab = e.target.closest(".ticket-selector__ptab");
-        if (ptab) {
-          var key = ptab.getAttribute("data-primary");
-          document.querySelectorAll(".ticket-selector__ptab").forEach(function (b) {
-            var on = b.getAttribute("data-primary") === key;
-            b.classList.toggle("is-active", on);
-            b.setAttribute("aria-selected", on ? "true" : "false");
-          });
-          return;
-        }
+
         var minus = e.target.closest(".ticket-row__step--minus");
         var plus = e.target.closest(".ticket-row__step--plus");
         if (minus || plus) {
@@ -588,6 +696,7 @@
           updateTotals();
           return;
         }
+
         var prevT = e.target.closest(".ticket-selector__tier-nav--prev");
         var nextT = e.target.closest(".ticket-selector__tier-nav--next");
         if (prevT || nextT) {
@@ -597,6 +706,9 @@
         }
       });
 
+      buildTimeSlotRows();
+      renderDateStrips();
+      syncTimeSlots();
       updateTotals();
     })();
   </script>

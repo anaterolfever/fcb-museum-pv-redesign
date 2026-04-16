@@ -9,4 +9,6 @@ English copy and a **Fever-style** layout preview: light UI, blue CTAs (`#3257ff
 
 Site root serves `index.html`: `https://anaterolfever.github.io/fcb-museum-pv-redesign/`
 
+Optional query (session picker presets in `js/booking-plan.js`): `?plan=fcb-museum` (default) or `?plan=karaoke-holey-moley` (wider evening time-slot list). Barça ticket tiers are unchanged.
+
 Ticket prices (“From €…”) follow the public Barça museum tiers; confirm on [fcbarcelona.com](https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca) before go-live.
