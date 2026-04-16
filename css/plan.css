@@ -686,6 +686,7 @@
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       padding: 1rem;
+      min-width: 0;
     }
 
     .ticket-selector__head {
@@ -716,10 +717,12 @@
     /* Calendar + time slots (Fever-style) */
     .booking-date-slot {
       margin-bottom: 0.85rem;
+      min-width: 0;
     }
     /* Full month calendar + month pills (Fever-style session picker) */
     .session-picker--calendar {
       margin-bottom: 0.25rem;
+      min-width: 0;
     }
     .session-picker__month-pills {
       display: flex;
@@ -954,9 +957,11 @@
       white-space: nowrap;
     }
 
-    /* Experience type (Basic / Total / Virtual / Flexible) — pill row after time slots */
+    /* Experience type (Basic / Total / Virtual / Flexible) — horizontal scroll like time slots */
     .experience-tier-block {
       margin-top: 0.85rem;
+      min-width: 0;
+      width: 100%;
     }
     .experience-tier-label {
       font-size: 0.75rem;
@@ -966,27 +971,34 @@
       letter-spacing: 0.04em;
       margin-bottom: 0.5rem;
     }
+    .experience-tier-scroll-outer {
+      overflow-x: auto;
+      overflow-y: hidden;
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      margin: 0 -0.25rem;
+      padding: 4px 0.25rem 10px;
+      scroll-snap-type: x proximity;
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      touch-action: pan-x;
+      overscroll-behavior-x: contain;
+    }
+    .experience-tier-scroll-outer::-webkit-scrollbar {
+      height: 4px;
+    }
+    .experience-tier-scroll-outer::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 4px;
+    }
     .experience-tier-row {
       display: flex;
       flex-wrap: nowrap;
       align-items: stretch;
       gap: 10px;
-    }
-    .experience-tier-row--scroll {
-      overflow-x: auto;
-      overflow-y: hidden;
-      margin: 0 -0.25rem;
-      padding: 4px 0.25rem 10px;
-      scroll-snap-type: x proximity;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: thin;
-    }
-    .experience-tier-row--scroll::-webkit-scrollbar {
-      height: 4px;
-    }
-    .experience-tier-row--scroll::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 4px;
+      width: max-content;
     }
     .experience-tier-pill.ticket-selector__tier {
       position: relative;
