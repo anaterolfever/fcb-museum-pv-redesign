@@ -169,9 +169,32 @@
               <div class="time-slot-label">Time</div>
               <div class="time-slot-row time-slot-row--scroll" data-time-slot-row role="listbox" aria-label="Select time"></div>
             </div>
+            <div class="session-cal__divider" role="separator"></div>
+            <div class="experience-tier-block">
+              <div class="experience-tier-label">Experience</div>
+              <div class="experience-tier-row" data-experience-tiers role="radiogroup" aria-label="Experience type">
+                <button type="button" class="ticket-selector__tier experience-tier-pill" data-experience-tier="basic" aria-pressed="false">
+                  <span class="ticket-selector__corner-check" aria-hidden="true"></span>
+                  Basic Ticket
+                </button>
+                <button type="button" class="ticket-selector__tier experience-tier-pill" data-experience-tier="total" aria-pressed="false">
+                  <span class="ticket-selector__corner-check" aria-hidden="true"></span>
+                  Total Experience
+                </button>
+                <button type="button" class="ticket-selector__tier experience-tier-pill" data-experience-tier="virtual" aria-pressed="false">
+                  <span class="ticket-selector__corner-check" aria-hidden="true"></span>
+                  Virtual Experience
+                </button>
+                <button type="button" class="ticket-selector__tier experience-tier-pill" data-experience-tier="flexible" aria-pressed="false">
+                  <span class="ticket-selector__corner-check" aria-hidden="true"></span>
+                  Flexible Basic Ticket
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <p class="ticket-selector__session-hint" data-visit-summary>Sat 21 Jun 2026 · 10:00 AM</p>
+        <div class="ticket-categories-wrap" data-ticket-categories-wrap hidden>
         <ul class="ticket-selector__rows ticket-selector__rows--categories">
           <li class="ticket-row ticket-row--category" data-session="cat-general" data-unit="33" data-fee="2.1">
             <div class="ticket-row__info ticket-row__info--cat">
@@ -279,6 +302,7 @@
             </div>
           </li>
         </ul>
+        </div>
         <button type="button" class="ticket-selector__cta ticket-selector__cta--disabled" id="ticketSelectorCtaMobile" disabled>Select tickets</button>
         </div>
 
@@ -356,10 +380,33 @@
               <div class="time-slot-label">Time</div>
               <div class="time-slot-row time-slot-row--scroll" data-time-slot-row role="listbox" aria-label="Select time"></div>
             </div>
+            <div class="session-cal__divider" role="separator"></div>
+            <div class="experience-tier-block">
+              <div class="experience-tier-label">Experience</div>
+              <div class="experience-tier-row" data-experience-tiers role="radiogroup" aria-label="Experience type">
+                <button type="button" class="ticket-selector__tier experience-tier-pill" data-experience-tier="basic" aria-pressed="false">
+                  <span class="ticket-selector__corner-check" aria-hidden="true"></span>
+                  Basic Ticket
+                </button>
+                <button type="button" class="ticket-selector__tier experience-tier-pill" data-experience-tier="total" aria-pressed="false">
+                  <span class="ticket-selector__corner-check" aria-hidden="true"></span>
+                  Total Experience
+                </button>
+                <button type="button" class="ticket-selector__tier experience-tier-pill" data-experience-tier="virtual" aria-pressed="false">
+                  <span class="ticket-selector__corner-check" aria-hidden="true"></span>
+                  Virtual Experience
+                </button>
+                <button type="button" class="ticket-selector__tier experience-tier-pill" data-experience-tier="flexible" aria-pressed="false">
+                  <span class="ticket-selector__corner-check" aria-hidden="true"></span>
+                  Flexible Basic Ticket
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         <p class="ticket-selector__session-hint" data-visit-summary>Sat 21 Jun 2026 · 10:00 AM</p>
+        <div class="ticket-categories-wrap" data-ticket-categories-wrap hidden>
         <ul class="ticket-selector__rows ticket-selector__rows--categories">
           <li class="ticket-row ticket-row--category" data-session="cat-general" data-unit="33" data-fee="2.1">
             <div class="ticket-row__info ticket-row__info--cat">
@@ -467,6 +514,7 @@
             </div>
           </li>
         </ul>
+        </div>
 
         <button type="button" class="ticket-selector__cta ticket-selector__cta--disabled" id="ticketSelectorCtaDesktop" disabled>Select tickets</button>
       </div>
@@ -639,7 +687,8 @@
         selY: sd[0],
         selM: sd[1],
         selD: sd[2],
-        time: cfg.defaultTime || "10:30"
+        time: cfg.defaultTime || "10:30",
+        experienceTier: null
       };
 
       function dayEnabled(y, m, d) {
@@ -691,6 +740,20 @@
           var on = btn.getAttribute("data-time") === bookingState.time;
           btn.classList.toggle("is-active", on);
           btn.setAttribute("aria-selected", on ? "true" : "false");
+        });
+      }
+
+      function syncExperienceTierUI() {
+        var tid = bookingState.experienceTier;
+        document.querySelectorAll(".ticket-selector [data-experience-tier]").forEach(function (btn) {
+          var on = btn.getAttribute("data-experience-tier") === tid;
+          btn.classList.toggle("is-active", on);
+          btn.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        var unlocked = tid != null && tid !== "";
+        document.querySelectorAll("[data-ticket-categories-wrap]").forEach(function (el) {
+          if (unlocked) el.removeAttribute("hidden");
+          else el.setAttribute("hidden", "");
         });
       }
 
@@ -930,6 +993,14 @@
           return;
         }
 
+        var tierBtn = e.target.closest("[data-experience-tier]");
+        if (tierBtn && tierBtn.closest(".ticket-selector")) {
+          bookingState.experienceTier = tierBtn.getAttribute("data-experience-tier") || null;
+          syncExperienceTierUI();
+          updateTotals();
+          return;
+        }
+
         var minus = e.target.closest(".ticket-row__step--minus");
         var plus = e.target.closest(".ticket-row__step--plus");
         if (minus || plus) {
@@ -950,6 +1021,7 @@
       buildTimeSlotRows();
       renderBookingCalendar();
       syncTimeSlots();
+      syncExperienceTierUI();
       updateTotals();
     })();
   </script>

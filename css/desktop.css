@@ -81,6 +81,15 @@
     font-size: 0.65rem;
   }
 
+  .detail-sidebar .experience-tier-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .detail-sidebar .experience-tier-pill.ticket-selector__tier {
+    font-size: 0.6875rem;
+    padding: 0.5rem 0.3rem;
+    min-height: 48px;
+  }
+
   /* Blueprint: hide inline mobile booking; sidebar is canonical on desktop */
   .detail-main .mobile-ticket-header,
   .detail-main .mobile-ticket-selector {

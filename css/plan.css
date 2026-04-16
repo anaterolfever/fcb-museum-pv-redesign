@@ -954,6 +954,61 @@
       white-space: nowrap;
     }
 
+    /* Experience type (Basic / Total / Virtual / Flexible) — pill row after time slots */
+    .experience-tier-block {
+      margin-top: 0.85rem;
+    }
+    .experience-tier-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.5rem;
+    }
+    .experience-tier-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+    @media (min-width: 560px) {
+      .experience-tier-row {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+    .experience-tier-pill.ticket-selector__tier {
+      position: relative;
+      width: 100%;
+      min-height: 52px;
+      margin: 0;
+      padding: 0.6rem 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1.25;
+      white-space: normal;
+      text-align: center;
+      border-radius: var(--radius-sm);
+      border: 1px solid #d1d5db;
+      color: var(--text);
+      background: #fff;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+      font-family: var(--font);
+    }
+    .experience-tier-pill.ticket-selector__tier:not(.is-active):hover {
+      border-color: #94a3b8;
+    }
+    .experience-tier-pill.ticket-selector__tier.is-active {
+      border: 2px solid var(--selector-blue);
+      color: var(--selector-blue);
+      font-weight: 700;
+      padding: calc(0.6rem - 1px) calc(0.4rem - 1px);
+    }
+    .ticket-categories-wrap[hidden] {
+      display: none !important;
+    }
+
     .ticket-selector__session-hint {
       margin: 0 0 0.65rem;
       font-size: 0.875rem;
