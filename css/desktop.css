@@ -1,0 +1,129 @@
+/**
+ * FCB Museum plan view — desktop (Fever / pruebaemi patterns).
+ * Tokens: primary #0079ca, border #ccd2d8, text #031419, bg-neutral #f2f3f3
+ */
+
+@media (min-width: 1024px) {
+  html {
+    overflow-x: clip;
+  }
+
+  .plan-shell {
+    max-width: 1440px;
+    margin: 0 auto;
+    overflow: visible;
+  }
+
+  .detail-layout {
+    display: grid !important;
+    grid-template-columns: 1fr 416px;
+    column-gap: 40px;
+    padding: 0 40px 48px;
+    align-items: start;
+    overflow: visible !important;
+  }
+
+  /* Hero spans full width above columns */
+  .detail-layout > .hero.fcb-hero,
+  .detail-layout > .fcb-hero {
+    grid-column: 1 / -1;
+  }
+
+  .detail-main {
+    min-width: 0;
+    padding: 8px 0 32px 0;
+  }
+
+  .detail-sidebar {
+    grid-column: 2;
+    width: 416px;
+    max-width: 416px;
+    position: sticky;
+    top: 88px;
+    align-self: start;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid var(--color-border, #ccd2d8);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+    overflow: visible;
+    z-index: 15;
+  }
+
+  .detail-sidebar .section-header--ticket {
+    border-radius: 12px 12px 0 0;
+    margin: 0;
+    padding: 12px 16px;
+    background: var(--color-bg-neutral, #f2f3f3);
+    border-bottom: 1px solid var(--color-border, #ccd2d8);
+  }
+
+  .detail-sidebar .ticket-selector {
+    border: none;
+    box-shadow: none;
+    border-radius: 0 0 12px 12px;
+    margin: 0;
+    padding: 16px;
+    padding-bottom: 24px;
+  }
+
+  /* Blueprint: hide inline mobile booking; sidebar is canonical on desktop */
+  .detail-main .mobile-ticket-header,
+  .detail-main .mobile-ticket-selector {
+    display: none !important;
+  }
+
+  .has-detail-layout .fev-sticky-cta {
+    display: none !important;
+  }
+
+  .detail-layout .fcb-hero {
+    height: 480px;
+    border-radius: 12px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+
+  .detail-layout .fcb-hero .rounded-top {
+    display: none;
+  }
+
+  .detail-main .title-section h1 {
+    font-size: 28px;
+    line-height: 32px;
+    font-weight: 600;
+  }
+
+  .detail-main .title-section {
+    padding-top: 4px;
+  }
+
+  .navbar {
+    max-width: 100%;
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .detail-layout {
+    padding: 0 80px 56px;
+  }
+
+  .navbar {
+    padding-left: 80px !important;
+    padding-right: 80px !important;
+  }
+}
+
+/* Mobile: single column; sidebar booking hidden — use .mobile-ticket-* in main */
+@media (max-width: 1023px) {
+  .detail-layout {
+    display: block !important;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .detail-sidebar {
+    display: none !important;
+  }
+}
