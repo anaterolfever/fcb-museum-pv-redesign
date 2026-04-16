@@ -66,17 +66,19 @@
     padding-bottom: 24px;
   }
 
-  .detail-sidebar .booking-cal__nav {
-    width: 32px;
-    height: 32px;
-    font-size: 1.1rem;
+  .detail-sidebar .month-pill {
+    padding: 8px 12px;
+    font-size: 0.75rem;
   }
-  .detail-sidebar .date-strip__day {
-    min-width: 46px;
-    padding: 0.35rem 0.25rem 0.4rem;
+  .detail-sidebar .session-cal__tile {
+    min-height: 58px;
+    padding: 5px 3px 9px;
   }
-  .detail-sidebar .date-strip__num {
-    font-size: 0.875rem;
+  .detail-sidebar .session-cal__tile-day {
+    font-size: 0.95rem;
+  }
+  .detail-sidebar .session-cal__tile-price {
+    font-size: 0.65rem;
   }
 
   /* Blueprint: hide inline mobile booking; sidebar is canonical on desktop */
