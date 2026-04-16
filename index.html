@@ -96,7 +96,7 @@
                       <li>Construction viewpoint</li>
                     </ul>
                     <div class="ticket-card__price">From €28</div>
-                    <a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+                    <button type="button" class="ticket-card__btn" data-select-experience="basic">Select</button>
                   </div>
                 </article>
                 <article class="ticket-card">
@@ -110,7 +110,7 @@
                       <li>Barça Virtual Dream (VR)</li>
                     </ul>
                     <div class="ticket-card__price">From €49</div>
-                    <a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+                    <button type="button" class="ticket-card__btn" data-select-experience="total">Select</button>
                   </div>
                 </article>
                 <article class="ticket-card">
@@ -123,7 +123,7 @@
                       <li>Barça Virtual Dream (VR)</li>
                     </ul>
                     <div class="ticket-card__price">From €42</div>
-                    <a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+                    <button type="button" class="ticket-card__btn" data-select-experience="virtual">Select</button>
                   </div>
                 </article>
                 <article class="ticket-card">
@@ -136,7 +136,7 @@
                       <li>Valid until the date shown at purchase</li>
                     </ul>
                     <div class="ticket-card__price">From €36</div>
-                    <a class="ticket-card__btn" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer">Select</a>
+                    <button type="button" class="ticket-card__btn" data-select-experience="flexible">Select</button>
                   </div>
                 </article>
               </div>
@@ -145,6 +145,7 @@
           </div>
         </section>
 
+        <div id="fcb-booking-anchor">
         <div class="section-header mobile-ticket-header section-header--ticket">
           <img src="img/fa-ticket.svg" alt="" width="24" height="24">
           <h2>Select date and session</h2>
@@ -306,6 +307,7 @@
         </ul>
         </div>
         <button type="button" class="ticket-selector__cta ticket-selector__cta--disabled" id="ticketSelectorCtaMobile" disabled>Select tickets</button>
+        </div>
         </div>
 
         <h2 class="pd-section__title">General information</h2>
@@ -956,6 +958,32 @@
       }
 
       document.addEventListener("click", function (e) {
+        var fromCarousel = e.target.closest(".ticket-card__btn[data-select-experience]");
+        if (fromCarousel) {
+          e.preventDefault();
+          var tier = fromCarousel.getAttribute("data-select-experience");
+          if (!tier) return;
+          bookingState.experienceTier = tier;
+          syncExperienceTierUI();
+          updateTotals();
+          var useDesk = window.matchMedia("(min-width: 1024px)").matches;
+          var scrollEl = useDesk
+            ? document.getElementById("ticketSelectorDesktop")
+            : document.getElementById("fcb-booking-anchor");
+          if (scrollEl) {
+            scrollEl.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+          window.setTimeout(function () {
+            var pill = document.querySelector(
+              '.ticket-selector [data-experience-tier="' + tier + '"]'
+            );
+            if (pill) {
+              pill.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+            }
+          }, 400);
+          return;
+        }
+
         var monthPill = e.target.closest("[data-cal-month]");
         if (monthPill && monthPill.closest(".ticket-selector")) {
           var vy = parseInt(monthPill.getAttribute("data-cal-month"), 10);
