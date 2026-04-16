@@ -1,10 +1,15 @@
 
     :root {
-      /* Aligned with pruebaemi / Fever plan tokens */
+      /* FC Barcelona — navy, blaugrana blue, gold CTA */
+      --fcb-navy: #181733;
+      --fcb-blue: #004d98;
+      --fcb-blue-hover: #003978;
+      --fcb-yellow: #edbb00;
+      --fcb-yellow-hover: #d4a800;
       --font: "Montserrat", -apple-system, BlinkMacSystemFont, sans-serif;
-      --color-primary: #0079ca;
-      --color-primary-hover: #0068b0;
-      --color-primary-weak: #e6f4ff;
+      --color-primary: var(--fcb-blue);
+      --color-primary-hover: var(--fcb-blue-hover);
+      --color-primary-weak: #e8f2fa;
       --color-text: #031419;
       --color-text-subtle: #536b75;
       --color-text-disable: #a7b2ba;
@@ -13,7 +18,7 @@
       --color-bg-neutral: #f2f3f3;
       --elevation-01: 0 1px 3px 0 rgba(0, 0, 0, 0.08);
       --elevation-02: 0 2px 4px rgba(0, 0, 0, 0.12);
-      --shadow-primary: 0 3px 3px rgba(0, 121, 202, 0.15);
+      --shadow-primary: 0 3px 3px rgba(0, 73, 152, 0.18);
       /* Ticket selector + legacy aliases */
       --selector-blue: var(--color-primary);
       --selector-blue-hover: var(--color-primary-hover);
@@ -48,8 +53,8 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--color-bg);
-      border-bottom: 1px solid var(--color-border);
+      background: var(--fcb-navy);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     .navbar {
       display: flex;
@@ -91,7 +96,7 @@
       width: 24px;
       height: 24px;
       flex-shrink: 0;
-      color: var(--color-text);
+      color: #fff;
     }
     .nav-icon-btn svg {
       width: 22px;
@@ -105,7 +110,7 @@
       height: min(52vh, 420px);
       max-height: 480px;
       overflow: hidden;
-      background: #06232c;
+      background: var(--fcb-navy);
     }
     .fcb-hero__track {
       display: flex;
@@ -363,7 +368,7 @@
     }
 
     .fcb-footer {
-      background: var(--color-text);
+      background: var(--fcb-navy);
       color: #fff;
       padding: 28px 16px 48px;
       margin-top: 0;
@@ -622,20 +627,21 @@
       font-weight: 600;
       font-family: var(--font);
       text-align: center;
-      color: var(--color-primary);
-      background: var(--color-bg);
-      border: 2px solid var(--color-primary);
-      border-radius: var(--radius-sm);
+      color: var(--fcb-navy);
+      background: var(--fcb-yellow);
+      border: 2px solid var(--fcb-yellow);
+      border-radius: 999px;
       cursor: pointer;
       text-decoration: none;
-      transition: background 0.15s, color 0.15s;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
     }
     button.ticket-card__btn {
       -webkit-appearance: none;
       appearance: none;
     }
     .ticket-card__btn:hover {
-      background: var(--color-primary-weak);
+      background: var(--fcb-yellow-hover);
+      border-color: var(--fcb-yellow-hover);
     }
 
     .ticket-carousel__dots {
@@ -655,7 +661,7 @@
       transition: transform 0.15s, background 0.15s;
     }
     .ticket-carousel__dot[aria-current="true"] {
-      background: var(--color-primary);
+      background: var(--fcb-yellow);
       transform: scale(1.15);
     }
 
@@ -756,8 +762,8 @@
       border-color: #94a3b8;
     }
     .month-pill.is-active {
-      background: #0f172a;
-      border-color: #0f172a;
+      background: var(--fcb-navy);
+      border-color: var(--fcb-navy);
       color: #fff;
     }
     .session-cal__weekdays {
@@ -818,7 +824,7 @@
       gap: 2px;
       border: 2px solid transparent;
       border-radius: 10px;
-      background: #f0f7ff;
+      background: var(--color-primary-weak);
       font-family: var(--font);
       cursor: pointer;
       transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
@@ -828,12 +834,12 @@
       text-align: center;
     }
     .session-cal__tile:hover {
-      border-color: rgba(0, 121, 202, 0.35);
+      border-color: rgba(0, 73, 152, 0.35);
     }
     .session-cal__tile.is-selected {
       border-color: var(--selector-blue);
-      background: #e6f4ff;
-      box-shadow: 0 0 0 1px rgba(0, 121, 202, 0.2);
+      background: #e0ecf7;
+      box-shadow: 0 0 0 1px rgba(0, 73, 152, 0.22);
     }
     .session-cal__tile-day {
       display: block;
@@ -1061,10 +1067,10 @@
       border-top: 1px solid var(--border);
     }
 
-    /* Category rows: ticket stub (tear + notch), Fever reference palette */
+    /* Category rows: ticket stub (tear + notch) */
     .ticket-row--category {
-      --stub-blue: #2b78c5;
-      --stub-bg-active: #e8f4ff;
+      --stub-blue: var(--fcb-blue);
+      --stub-bg-active: var(--color-primary-weak);
       --stub-border-idle: #d1d5db;
       display: grid;
       grid-template-columns: minmax(0, 1fr) 14px max-content;
@@ -1097,7 +1103,7 @@
     .ticket-cat__name {
       font-size: 1rem;
       font-weight: 700;
-      color: #0f172a;
+      color: var(--fcb-navy);
       margin: 0;
       line-height: 1.25;
       letter-spacing: -0.02em;
@@ -1128,7 +1134,7 @@
     .ticket-cat__price {
       font-size: 1rem;
       font-weight: 700;
-      color: #0f172a;
+      color: var(--fcb-navy);
       margin: 0;
       line-height: 1.2;
     }
@@ -1149,7 +1155,7 @@
     }
     .ticket-row--category.is-selected .ticket-row__tear--cat {
       background: var(--stub-bg-active);
-      border-left-color: rgba(43, 120, 197, 0.45);
+      border-left-color: rgba(0, 73, 152, 0.45);
     }
     .ticket-row--category .ticket-row__tear--cat::before,
     .ticket-row--category .ticket-row__tear--cat::after {
@@ -1202,7 +1208,7 @@
       box-shadow: none;
     }
     .ticket-row--category.is-selected .ticket-row__stepper--stub {
-      border-color: rgba(43, 120, 197, 0.4);
+      border-color: rgba(0, 73, 152, 0.4);
       background: #fff;
     }
 
@@ -1248,7 +1254,7 @@
       min-width: 1.35rem;
       font-size: 0.9375rem;
       font-weight: 700;
-      color: #0f172a;
+      color: var(--fcb-navy);
     }
 
     .ticket-selector__tier-wrap {
@@ -1348,7 +1354,7 @@
     }
     .ticket-row.is-selected {
       border: 2px solid var(--selector-blue);
-      box-shadow: 0 0 0 1px rgba(0, 119, 200, 0.15);
+      box-shadow: 0 0 0 1px rgba(0, 73, 152, 0.18);
     }
     .ticket-row.is-selected .ticket-row__stub {
       background: var(--selector-blue-soft);
@@ -1435,7 +1441,7 @@
       box-shadow: 0 1px 2px rgba(0,0,0,0.04);
     }
     .ticket-row.is-selected .ticket-row__stepper {
-      border-color: rgba(0, 119, 200, 0.35);
+      border-color: rgba(0, 73, 152, 0.35);
     }
     .ticket-row__step {
       width: 28px;
@@ -1473,8 +1479,8 @@
       align-items: center;
     }
     .ticket-row.ticket-row--category.is-selected {
-      background: #e8f4ff;
-      border: 2px solid #2b78c5;
+      background: var(--color-primary-weak);
+      border: 2px solid var(--fcb-blue);
       box-shadow: none;
     }
     .ticket-row.ticket-row--category .ticket-row__info--cat {
@@ -1490,13 +1496,13 @@
       background: #fff;
     }
     .ticket-row.ticket-row--category.is-selected .ticket-row__tear--cat {
-      background: #e8f4ff;
-      border-left-color: rgba(43, 120, 197, 0.45);
+      background: var(--color-primary-weak);
+      border-left-color: rgba(0, 73, 152, 0.45);
     }
     .ticket-row.ticket-row--category.is-selected .ticket-row__tear--cat::before,
     .ticket-row.ticket-row--category.is-selected .ticket-row__tear--cat::after {
       background: var(--bg);
-      border-color: #2b78c5;
+      border-color: var(--fcb-blue);
     }
     .ticket-row.ticket-row--category:not(.is-selected) .ticket-row__tear--cat::before,
     .ticket-row.ticket-row--category:not(.is-selected) .ticket-row__tear--cat::after {
@@ -1522,14 +1528,14 @@
       padding: 0.9rem 1rem;
       font-size: 1rem;
       font-weight: 700;
-      color: #fff;
-      background: var(--selector-blue);
+      color: var(--fcb-navy);
+      background: var(--fcb-yellow);
       border: none;
       border-radius: 999px;
       cursor: pointer;
       transition: background 0.15s;
     }
-    .ticket-selector__cta:hover:not(:disabled) { background: var(--selector-blue-hover); }
+    .ticket-selector__cta:hover:not(:disabled) { background: var(--fcb-yellow-hover); }
     .ticket-selector__cta:disabled,
     .ticket-selector__cta--disabled {
       background: var(--bg-muted);

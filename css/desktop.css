@@ -1,6 +1,6 @@
 /**
- * FCB Museum plan view — desktop (Fever / pruebaemi patterns).
- * Tokens: primary #0079ca, border #ccd2d8, text #031419, bg-neutral #f2f3f3
+ * FCB Museum plan view — desktop layout.
+ * Brand tokens live in plan.css (:root — FCB navy / blue / yellow).
  */
 
 @media (min-width: 1024px) {
