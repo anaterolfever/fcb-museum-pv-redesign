@@ -157,7 +157,7 @@
               <div class="session-cal__weekdays" aria-hidden="true">
                 <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
               </div>
-              <div class="session-cal__grid" data-booking-grid role="grid" aria-label="Calendar"></div>
+              <div class="session-cal__grid" data-booking-grid aria-label="Calendar"></div>
             </div>
             <p class="session-cal__fineprint">All prices shown in EUR</p>
             <div class="session-cal__legend">
@@ -174,14 +174,20 @@
         <p class="ticket-selector__session-hint" data-visit-summary>Sat 21 Jun 2026 · 10:00 AM</p>
         <ul class="ticket-selector__rows ticket-selector__rows--categories">
           <li class="ticket-row ticket-row--category" data-session="cat-general" data-unit="33" data-fee="2.1">
-            <div class="ticket-row__info">
-              <span class="ticket-cat__badge"><svg class="ticket-cat__badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Average availability</span>
-              <div class="ticket-cat__name">General</div>
-              <div class="ticket-cat__price">€33.00</div>
-              <div class="ticket-cat__admin">Administration fees €2.10</div>
+            <div class="ticket-row__info ticket-row__info--cat">
+              <div class="ticket-cat__top">
+                <div class="ticket-cat__name">General</div>
+                <a class="ticket-cat__more" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer" target="_blank">More info</a>
+                <p class="ticket-cat__avail">Average availability</p>
+              </div>
+              <div class="ticket-cat__foot">
+                <div class="ticket-cat__price">€33.00</div>
+                <div class="ticket-cat__admin">Administration fees €2.10</div>
+              </div>
             </div>
+            <div class="ticket-row__tear ticket-row__tear--cat" aria-hidden="true"></div>
             <div class="ticket-row__stub ticket-row__stub--category">
-              <div class="ticket-row__stepper ticket-row__stepper--fever">
+              <div class="ticket-row__stepper ticket-row__stepper--stub">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
@@ -189,14 +195,20 @@
             </div>
           </li>
           <li class="ticket-row ticket-row--category" data-session="cat-children" data-unit="26" data-fee="2.1">
-            <div class="ticket-row__info">
-              <span class="ticket-cat__badge"><svg class="ticket-cat__badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Average availability</span>
-              <div class="ticket-cat__name">Children (from 4 to 10)</div>
-              <div class="ticket-cat__price">€26.00</div>
-              <div class="ticket-cat__admin">Administration fees €2.10</div>
+            <div class="ticket-row__info ticket-row__info--cat">
+              <div class="ticket-cat__top">
+                <div class="ticket-cat__name">Children (from 4 to 10)</div>
+                <a class="ticket-cat__more" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer" target="_blank">More info</a>
+                <p class="ticket-cat__avail">Average availability</p>
+              </div>
+              <div class="ticket-cat__foot">
+                <div class="ticket-cat__price">€26.00</div>
+                <div class="ticket-cat__admin">Administration fees €2.10</div>
+              </div>
             </div>
+            <div class="ticket-row__tear ticket-row__tear--cat" aria-hidden="true"></div>
             <div class="ticket-row__stub ticket-row__stub--category">
-              <div class="ticket-row__stepper ticket-row__stepper--fever">
+              <div class="ticket-row__stepper ticket-row__stepper--stub">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
@@ -204,14 +216,20 @@
             </div>
           </li>
           <li class="ticket-row ticket-row--category" data-session="cat-senior" data-unit="26" data-fee="2.1">
-            <div class="ticket-row__info">
-              <span class="ticket-cat__badge"><svg class="ticket-cat__badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Average availability</span>
-              <div class="ticket-cat__name">Over 65 years</div>
-              <div class="ticket-cat__price">€26.00</div>
-              <div class="ticket-cat__admin">Administration fees €2.10</div>
+            <div class="ticket-row__info ticket-row__info--cat">
+              <div class="ticket-cat__top">
+                <div class="ticket-cat__name">Over 65 years</div>
+                <a class="ticket-cat__more" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer" target="_blank">More info</a>
+                <p class="ticket-cat__avail">Average availability</p>
+              </div>
+              <div class="ticket-cat__foot">
+                <div class="ticket-cat__price">€26.00</div>
+                <div class="ticket-cat__admin">Administration fees €2.10</div>
+              </div>
             </div>
+            <div class="ticket-row__tear ticket-row__tear--cat" aria-hidden="true"></div>
             <div class="ticket-row__stub ticket-row__stub--category">
-              <div class="ticket-row__stepper ticket-row__stepper--fever">
+              <div class="ticket-row__stepper ticket-row__stepper--stub">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
@@ -219,14 +237,20 @@
             </div>
           </li>
           <li class="ticket-row ticket-row--category" data-session="cat-student" data-unit="20" data-fee="2.1">
-            <div class="ticket-row__info">
-              <span class="ticket-cat__badge"><svg class="ticket-cat__badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Average availability</span>
-              <div class="ticket-cat__name">Student</div>
-              <div class="ticket-cat__price">€20.00</div>
-              <div class="ticket-cat__admin">Administration fees €2.10</div>
+            <div class="ticket-row__info ticket-row__info--cat">
+              <div class="ticket-cat__top">
+                <div class="ticket-cat__name">Student</div>
+                <a class="ticket-cat__more" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer" target="_blank">More info</a>
+                <p class="ticket-cat__avail">Average availability</p>
+              </div>
+              <div class="ticket-cat__foot">
+                <div class="ticket-cat__price">€20.00</div>
+                <div class="ticket-cat__admin">Administration fees €2.10</div>
+              </div>
             </div>
+            <div class="ticket-row__tear ticket-row__tear--cat" aria-hidden="true"></div>
             <div class="ticket-row__stub ticket-row__stub--category">
-              <div class="ticket-row__stepper ticket-row__stepper--fever">
+              <div class="ticket-row__stepper ticket-row__stepper--stub">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
@@ -234,14 +258,20 @@
             </div>
           </li>
           <li class="ticket-row ticket-row--category" data-session="cat-catalonia" data-unit="21" data-fee="2.1">
-            <div class="ticket-row__info">
-              <span class="ticket-cat__badge"><svg class="ticket-cat__badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Average availability</span>
-              <div class="ticket-cat__name">Catalonia residents</div>
-              <div class="ticket-cat__price">€21.00</div>
-              <div class="ticket-cat__admin">Administration fees €2.10</div>
+            <div class="ticket-row__info ticket-row__info--cat">
+              <div class="ticket-cat__top">
+                <div class="ticket-cat__name">Catalonia residents</div>
+                <a class="ticket-cat__more" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer" target="_blank">More info</a>
+                <p class="ticket-cat__avail">Average availability</p>
+              </div>
+              <div class="ticket-cat__foot">
+                <div class="ticket-cat__price">€21.00</div>
+                <div class="ticket-cat__admin">Administration fees €2.10</div>
+              </div>
             </div>
+            <div class="ticket-row__tear ticket-row__tear--cat" aria-hidden="true"></div>
             <div class="ticket-row__stub ticket-row__stub--category">
-              <div class="ticket-row__stepper ticket-row__stepper--fever">
+              <div class="ticket-row__stepper ticket-row__stepper--stub">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
@@ -314,7 +344,7 @@
               <div class="session-cal__weekdays" aria-hidden="true">
                 <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
               </div>
-              <div class="session-cal__grid" data-booking-grid role="grid" aria-label="Calendar"></div>
+              <div class="session-cal__grid" data-booking-grid aria-label="Calendar"></div>
             </div>
             <p class="session-cal__fineprint">All prices shown in EUR</p>
             <div class="session-cal__legend">
@@ -332,14 +362,20 @@
         <p class="ticket-selector__session-hint" data-visit-summary>Sat 21 Jun 2026 · 10:00 AM</p>
         <ul class="ticket-selector__rows ticket-selector__rows--categories">
           <li class="ticket-row ticket-row--category" data-session="cat-general" data-unit="33" data-fee="2.1">
-            <div class="ticket-row__info">
-              <span class="ticket-cat__badge"><svg class="ticket-cat__badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Average availability</span>
-              <div class="ticket-cat__name">General</div>
-              <div class="ticket-cat__price">€33.00</div>
-              <div class="ticket-cat__admin">Administration fees €2.10</div>
+            <div class="ticket-row__info ticket-row__info--cat">
+              <div class="ticket-cat__top">
+                <div class="ticket-cat__name">General</div>
+                <a class="ticket-cat__more" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer" target="_blank">More info</a>
+                <p class="ticket-cat__avail">Average availability</p>
+              </div>
+              <div class="ticket-cat__foot">
+                <div class="ticket-cat__price">€33.00</div>
+                <div class="ticket-cat__admin">Administration fees €2.10</div>
+              </div>
             </div>
+            <div class="ticket-row__tear ticket-row__tear--cat" aria-hidden="true"></div>
             <div class="ticket-row__stub ticket-row__stub--category">
-              <div class="ticket-row__stepper ticket-row__stepper--fever">
+              <div class="ticket-row__stepper ticket-row__stepper--stub">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
@@ -347,14 +383,20 @@
             </div>
           </li>
           <li class="ticket-row ticket-row--category" data-session="cat-children" data-unit="26" data-fee="2.1">
-            <div class="ticket-row__info">
-              <span class="ticket-cat__badge"><svg class="ticket-cat__badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Average availability</span>
-              <div class="ticket-cat__name">Children (from 4 to 10)</div>
-              <div class="ticket-cat__price">€26.00</div>
-              <div class="ticket-cat__admin">Administration fees €2.10</div>
+            <div class="ticket-row__info ticket-row__info--cat">
+              <div class="ticket-cat__top">
+                <div class="ticket-cat__name">Children (from 4 to 10)</div>
+                <a class="ticket-cat__more" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer" target="_blank">More info</a>
+                <p class="ticket-cat__avail">Average availability</p>
+              </div>
+              <div class="ticket-cat__foot">
+                <div class="ticket-cat__price">€26.00</div>
+                <div class="ticket-cat__admin">Administration fees €2.10</div>
+              </div>
             </div>
+            <div class="ticket-row__tear ticket-row__tear--cat" aria-hidden="true"></div>
             <div class="ticket-row__stub ticket-row__stub--category">
-              <div class="ticket-row__stepper ticket-row__stepper--fever">
+              <div class="ticket-row__stepper ticket-row__stepper--stub">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
@@ -362,14 +404,20 @@
             </div>
           </li>
           <li class="ticket-row ticket-row--category" data-session="cat-senior" data-unit="26" data-fee="2.1">
-            <div class="ticket-row__info">
-              <span class="ticket-cat__badge"><svg class="ticket-cat__badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Average availability</span>
-              <div class="ticket-cat__name">Over 65 years</div>
-              <div class="ticket-cat__price">€26.00</div>
-              <div class="ticket-cat__admin">Administration fees €2.10</div>
+            <div class="ticket-row__info ticket-row__info--cat">
+              <div class="ticket-cat__top">
+                <div class="ticket-cat__name">Over 65 years</div>
+                <a class="ticket-cat__more" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer" target="_blank">More info</a>
+                <p class="ticket-cat__avail">Average availability</p>
+              </div>
+              <div class="ticket-cat__foot">
+                <div class="ticket-cat__price">€26.00</div>
+                <div class="ticket-cat__admin">Administration fees €2.10</div>
+              </div>
             </div>
+            <div class="ticket-row__tear ticket-row__tear--cat" aria-hidden="true"></div>
             <div class="ticket-row__stub ticket-row__stub--category">
-              <div class="ticket-row__stepper ticket-row__stepper--fever">
+              <div class="ticket-row__stepper ticket-row__stepper--stub">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
@@ -377,14 +425,20 @@
             </div>
           </li>
           <li class="ticket-row ticket-row--category" data-session="cat-student" data-unit="20" data-fee="2.1">
-            <div class="ticket-row__info">
-              <span class="ticket-cat__badge"><svg class="ticket-cat__badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Average availability</span>
-              <div class="ticket-cat__name">Student</div>
-              <div class="ticket-cat__price">€20.00</div>
-              <div class="ticket-cat__admin">Administration fees €2.10</div>
+            <div class="ticket-row__info ticket-row__info--cat">
+              <div class="ticket-cat__top">
+                <div class="ticket-cat__name">Student</div>
+                <a class="ticket-cat__more" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer" target="_blank">More info</a>
+                <p class="ticket-cat__avail">Average availability</p>
+              </div>
+              <div class="ticket-cat__foot">
+                <div class="ticket-cat__price">€20.00</div>
+                <div class="ticket-cat__admin">Administration fees €2.10</div>
+              </div>
             </div>
+            <div class="ticket-row__tear ticket-row__tear--cat" aria-hidden="true"></div>
             <div class="ticket-row__stub ticket-row__stub--category">
-              <div class="ticket-row__stepper ticket-row__stepper--fever">
+              <div class="ticket-row__stepper ticket-row__stepper--stub">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
@@ -392,14 +446,20 @@
             </div>
           </li>
           <li class="ticket-row ticket-row--category" data-session="cat-catalonia" data-unit="21" data-fee="2.1">
-            <div class="ticket-row__info">
-              <span class="ticket-cat__badge"><svg class="ticket-cat__badge-icon" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg> Average availability</span>
-              <div class="ticket-cat__name">Catalonia residents</div>
-              <div class="ticket-cat__price">€21.00</div>
-              <div class="ticket-cat__admin">Administration fees €2.10</div>
+            <div class="ticket-row__info ticket-row__info--cat">
+              <div class="ticket-cat__top">
+                <div class="ticket-cat__name">Catalonia residents</div>
+                <a class="ticket-cat__more" href="https://www.fcbarcelona.com/en/entradas/camp-nou-experience/visitas-museo-barca" rel="noopener noreferrer" target="_blank">More info</a>
+                <p class="ticket-cat__avail">Average availability</p>
+              </div>
+              <div class="ticket-cat__foot">
+                <div class="ticket-cat__price">€21.00</div>
+                <div class="ticket-cat__admin">Administration fees €2.10</div>
+              </div>
             </div>
+            <div class="ticket-row__tear ticket-row__tear--cat" aria-hidden="true"></div>
             <div class="ticket-row__stub ticket-row__stub--category">
-              <div class="ticket-row__stepper ticket-row__stepper--fever">
+              <div class="ticket-row__stepper ticket-row__stepper--stub">
                 <button type="button" class="ticket-row__step ticket-row__step--minus" aria-label="Decrease" disabled>−</button>
                 <span class="ticket-row__qty" data-qty>0</span>
                 <button type="button" class="ticket-row__step ticket-row__step--plus" aria-label="Increase">+</button>
@@ -761,8 +821,7 @@
                 '">' +
                 '<span class="session-cal__tile-day">' +
                 dnum +
-                "</span>" +
-                '<span class="session-cal__tile-price">' +
+                '</span> <span class="session-cal__tile-price">' +
                 fromPrice +
                 "</span>" +
                 (status === "low"
